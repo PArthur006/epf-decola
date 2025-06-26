@@ -1,12 +1,11 @@
 class Voo:
-    def __init__(self, numero_voo, preco, data_partida, data_chegada, assentos_total, reservar_assento):
+    def __init__(self, numero_voo, preco, data_partida, data_chegada, assentos_total):
         self.numero_voo = numero_voo
         self.preco = preco
         self.data_partida = data_partida
         self.data_chegada = data_chegada
         self.assentos_total = assentos_total
         self.assentos_disp = assentos_total
-        self.reservar_assento = reservar_assento
         pass 
 
     def __repr__(self):
@@ -43,3 +42,12 @@ class Voo:
             print('Ainda há {self.assentos_disp} assentos disponiveís'),
         pass
     
+    def reserva(self,assentos_disp):
+        resposta = input('deseja reservar o assento?(sim/não)')
+        if resposta == 'sim':
+            if assentos_disp > 0:
+                assentos_disp -= 1
+            else:
+             print('invalido') #ver relações com def assentos disponiveis e fazer tratamento de erro
+            return assentos_disp
+        pass
