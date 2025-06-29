@@ -37,17 +37,27 @@ class Voo:
 
     def assentos_disponiveis(self):
         if self.assentos_disp == 0 :
-            print('Não existem assentos disponiveís'),
+            print('Não existem assentos disponiveís')
+            return False
         else:
-            print('Ainda há {self.assentos_disp} assentos disponiveís'),
-        pass
+            print(f'Ainda há {self.assentos_disp} assentos disponiveís')
+            return True
+        
     
-    def reserva(self,assentos_disp):
-        resposta = input('deseja reservar o assento?(sim/não)')
-        if resposta == 'sim':
-            if assentos_disp > 0:
-                assentos_disp -= 1
+    def reserva(self):
+        try:
+            if not self.assentos_disponiveis():
+                raise Exception("Voo lotado")
+            
+            resposta = input('deseja reservar o assento?(sim/não)')
+            if resposta == 'sim':
+                self.assentos_disp -=1
+            elif resposta == 'não':
+                print('Reserva não realizada')
             else:
-             print('invalido') #ver relações com def assentos disponiveis e fazer tratamento de erro
-            return assentos_disp
-        pass
+                print('Entrada invalida, digite "sim" ou "não"')
+        except Exception as erro:
+            print(f'Error: {erro}')
+       
+    
+  
