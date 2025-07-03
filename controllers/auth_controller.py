@@ -13,4 +13,4 @@ class AuthController(BaseController):
         return self.render('login')
     
     def signup_page(self):
-        return "<h1>Página de Cadastro em construção</h1>"
+        return self.render('signup')
