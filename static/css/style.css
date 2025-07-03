@@ -205,3 +205,89 @@ body {
   box-shadow: var(--shadow);
 }
 
+/* Estilos para Páginas de Formulário (Login/Cadastro) */
+
+.form-page-container {
+  display:  flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  min-height: calc(100vh - 80px );
+}
+
+.form-box {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.form-box h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn-full {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-full:hover {
+  background-color: #0056b3;
+}
+
+.form-footer {
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+.form-footer a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Estilos para o botão de mostrar/ocultar senha */
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  user-select: none;
+}
