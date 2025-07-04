@@ -1,4 +1,8 @@
+from datetime import datetime
 from models.voo import Voo
+import json
+import os
+
 
 class Destino(Voo):
     def __init__(self, numero_voo, preco, data_partida, data_chegada, assentos_total,
@@ -48,10 +52,6 @@ class Destino(Voo):
 
 
 
-import json
-import os
-from datetime import datetime
-from models.destino import Destino
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
