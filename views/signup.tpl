@@ -7,6 +7,8 @@
     <title>Cadastro - Decola-Brasil</title>
 </head>
 <body>
+    %include("navbar.tpl") 
+
     <div class="form-page-container">
         <div class="form-box">
             <h2>Crie sua conta</h2>
@@ -21,11 +23,17 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="password-wrapper">
+                        <input type="password" id="signupPassword" name="password" required>
+                        <span id="toggleSignupPassword" class="toggle-password">👁️</span>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="confirm_password">Confirme sua Senha</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required>
+                    <label for="confirmPassword">Confirme sua Senha</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmPassword" name="confirm_password" required>
+                        <span id="toggleConfirmPassword" class="toggle-password">👁️</span>
+                    </div>
                 </div>
                 <button type="submit" class="btn-full">Criar conta</button>
             </form>
@@ -34,5 +42,7 @@
             </div>
         </div>
     </div>
+
+    <script src="static/js/main.js"></script>
 </body>
 </html>

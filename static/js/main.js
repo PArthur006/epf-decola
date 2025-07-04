@@ -25,14 +25,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Função genérica para alternar a visibilidade de senha
+    function togglePasswordVisibility(inputElement, toggleElement) {
+        if (inputElement && toggleElement) {
+            toggleElement.addEventListener('click', function() {
+                const type = inputElement.getAttribute('type') === 'password' ? 'text' : 'password';
+                inputElement.setAttribute('type', type)
+                this.textContent = type === 'password' ? '👁️' : '🙈';
+            })
+        }
+    }
+
+    // Pega os elementos do campo de senha do login
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('passwordInput');
 
-    if (togglePassword && passwordInput) {
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
-    }
+    togglePasswordVisibility(passwordInput, togglePassword);
+
+    // Pega os elementos do primeiro campo de senha do cadastro
+    const signupPassowordInput = document.getElementById('signupPassword');
+    const toggleSignupPasswordBtn = document.getElementById('toggleSignupPassword');
+
+    // Pega os elementos do segundo campo de senha do cadastro
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const toggleConfirmPasswordBtn = document.getElementById('toggleConfirmPassword');
+
+    // Alterna a visibilidade da senha do cadastro
+    togglePasswordVisibility(signupPassowordInput, toggleSignupPasswordBtn);
+    togglePasswordVisibility(confirmPasswordInput, toggleConfirmPasswordBtn);
 });
