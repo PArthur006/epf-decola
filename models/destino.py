@@ -35,3 +35,72 @@ class Destino(Voo):
             pais=data['País'],
             aeroporto=data['Aeroporto']
         )
+
+    def atualizar_destino(self, cidade=None, pais=None, aeroporto=None):
+        if cidade is not None:
+            self.cidade = cidade
+
+        if pais is not None:
+            self.pais = pais
+
+        if aeroporto is not None:
+            self.aeroporto = aeroporto
+
+
+
+import json
+import os
+from datetime import datetime
+from models.destino import Destino
+
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+os.makedirs(DATA_DIR, exist_ok=True)
+
+class DestinoModel:
+    FILE_PATH = os.path.join(DATA_DIR, 'destinos.json')
+
+    def __init__(self):
+        self.destinos = self._load()
+
+    def _load(self):
+        if not os.path.exists(self.FILE_PATH):
+            return []
+        with open(self.FILE_PATH, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            # Converte strings ISO para datetime
+            for item in data:
+                item['Data de partida'] = datetime.fromisoformat(item['Data de partida'])
+                item['Data de chegada'] = datetime.fromisoformat(item['Data de chegada'])
+            return [Destino.from_dict(item) for item in data]
+
+    def _save(self):
+        with open(self.FILE_PATH, 'w', encoding='utf-8') as f:
+            json.dump([self._format_dates(d.to_dict()) for d in self.destinos], f, ensure_ascii=False, indent=4)
+
+    def _format_dates(self, data_dict):
+        if isinstance(data_dict.get('Data de partida'), datetime):
+            data_dict['Data de partida'] = data_dict['Data de partida'].isoformat()
+        if isinstance(data_dict.get('Data de chegada'), datetime):
+            data_dict['Data de chegada'] = data_dict['Data de chegada'].isoformat()
+        return data_dict
+
+    def get_all(self):
+        return self.destinos
+
+    def get_by_numero_voo(self, numero_voo):
+        return next((d for d in self.destinos if d.numero_voo == numero_voo), None)
+
+    def add(self, destino: Destino):
+        self.destinos.append(destino)
+        self._save()
+
+    def update(self, destino_atualizado: Destino):
+        for i, d in enumerate(self.destinos):
+            if d.numero_voo == destino_atualizado.numero_voo:
+                self.destinos[i] = destino_atualizado
+                self._save()
+                break
+
+    def delete(self, numero_voo):
+        self.destinos = [d for d in self.destinos if d.numero_voo != numero_voo]
+        self._save()
