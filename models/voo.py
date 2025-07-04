@@ -34,30 +34,55 @@ class Voo:
         )
     
     # Assentos
-
+    
     def assentos_disponiveis(self):
-        if self.assentos_disp == 0 :
-            print('Não existem assentos disponiveís')
-            return False
-        else:
-            print(f'Ainda há {self.assentos_disp} assentos disponiveís')
-            return True
-        
-    
+        return self.assentos_disp > 0
+
     def reserva(self):
-        try:
-            if not self.assentos_disponiveis():
-                raise Exception("Voo lotado")
-            
-            resposta = input('deseja reservar o assento?(sim/não)')
-            if resposta == 'sim':
-                self.assentos_disp -=1
-            elif resposta == 'não':
-                print('Reserva não realizada')
-            else:
-                print('Entrada invalida, digite "sim" ou "não"')
-        except Exception as erro:
-            print(f'Error: {erro}')
-       
+        if self.assentos_disp > 0:
+            self.assentos_disp -= 1
+            return True
+        return False
     
-  
+    def cancel_reserva(self):
+        if self.assentos_disp < self.assentos_total:
+            self.assentos_disp += 1
+            return True
+        return False
+       
+   
+
+    #Inserção de informaçoes
+    def definir_novo_dados_voo(self, numero_voo, preco, data_partida, data_chegada, assentos_total):
+        self.numero_voo = numero_voo
+        self.preco = preco
+        self.data_partida = data_partida
+        self.data_chegada = data_chegada
+        self.assentos_total = assentos_total
+        self.assentos_disp = assentos_total
+
+   
+    def atualizar_voo(self, preco=None, data_partida=None, data_chegada=None, assentos_total=None):
+        if preco is not None:
+            self.preco = preco
+
+        if data_partida is not None:
+            self.data_partida = data_partida
+
+        if data_chegada is not None:
+            self.data_chegada = data_chegada
+            
+        if assentos_total is not None:
+            diferenca = assentos_total - self.assentos_total
+            self.assentos_total = assentos_total
+            self.assentos_disp += diferenca 
+            if self.assentos_disp > self.assentos_total:
+                self.assentos_disp = self.assentos_total
+
+   
+   
+
+
+
+
+       
