@@ -2,7 +2,6 @@ from datetime import datetime
 import json
 import os
 
-
 class Pagamento:
     def __init__(self, id_pagamento, numero_voo, valor, forma_pagamento, status, data_pagamento=None):
         self.id_pagamento = id_pagamento
@@ -71,6 +70,18 @@ class PagamentoModel:
             data_dict['Data do pagamento'] = data_dict['Data do pagamento'].isoformat()
         return data_dict
 
+    def gerar_proximo_id(self):
+        if not self.pagamentos:
+            return "PG0001"
+        
+        ultimos_ids = [
+            int(p.id_pagamento.replace("PG", ""))
+            for p in self.pagamentos
+            if p.id_pagamento.startswith("PG") and p.id_pagamento[2:].isdigit()
+        ]
+        proximo_num = max(ultimos_ids, default=0) + 1
+        return f"PG{proximo_num:04d}"
+
     def get_all(self):
         return self.pagamentos
 
@@ -78,6 +89,8 @@ class PagamentoModel:
         return next((p for p in self.pagamentos if p.id_pagamento == id_pagamento), None)
 
     def add(self, pagamento: Pagamento):
+        # Sempre gera um novo ID automaticamente ao adicionar
+        pagamento.id_pagamento = self.gerar_proximo_id()
         self.pagamentos.append(pagamento)
         self._save()
 
