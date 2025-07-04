@@ -1,19 +1,19 @@
 from .base_controller import BaseController
 
 class FlightController(BaseController):
-    """Responsável por todas as rotas relacionadas a voos."""
+    """ Responsável por todas as rotas relacionadas a voos. """
 
     def __init__(self, app):
         super().__init__(app)
         self.setup_routes()
 
     def setup_routes(self):
-            """Define e registra as rotas na aplicação Bottle."""
+            """ Define e registra as rotas na aplicação Bottle. """
             self.app.route('/flights', method='GET', callback=self.list_flights)
 
     def list_flights(self):
-        """ Lista todos os voos disponíveis."""
-        """ Implementar a lógica para listar os voos. A lógica a seguir é um exemplo para testes."""
+        """ Lista todos os voos disponíveis. """
+        """ Implementar a lógica para listar os voos. A lógica a seguir é um exemplo para testes. """
 
         mock_flights = [
             {
