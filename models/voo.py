@@ -4,23 +4,25 @@ import json
 import os
 
 class Voo:
-    def __init__(self, numero_voo, preco, data_partida, data_chegada, assentos_total):
+    def __init__(self, numero_voo, preco, data_partida, data_chegada, assentos_total, comp_aerea):
         self.numero_voo = numero_voo
         self.preco = preco
         self.data_partida = data_partida
         self.data_chegada = data_chegada
+        self.comp_aerea = comp_aerea
         self.assentos_total = assentos_total
         self.assentos_disp = assentos_total
         pass 
 
     def __repr__(self):
      return (f"Voo(numero_voo={self.numero_voo}, preco='{self.preco}', data_partida='{self.data_partida}', "
-            f"data_chegada='{self.data_chegada}', assentos_total={self.assentos_total}, assentos_disp={self.assentos_disp})")
+            f"data_chegada='{self.data_chegada}',comp_aerea='{self.comp_aerea}', assentos_total={self.assentos_total}, assentos_disp={self.assentos_disp})")
 
     
     def to_dict(self):
         return{
         'Número do voo': self.numero_voo,
+        'Companhia Aérea': self.comp_aerea,
         'Data de partida': self.data_partida,              
         'Data de chegada': self.data_chegada,
         'Número de assentos': self.assentos_total,
@@ -32,6 +34,7 @@ class Voo:
     def from_dict(cls, data):
         return cls(
            numero_voo = data['Número do voo'],
+           comp_aerea = data['Companhia Aérea'],
            data_partida = data['Data de partida'],
            data_chegada = data['Data de chegada'],
            assentos_total = data['Número de assentos'],
@@ -58,8 +61,9 @@ class Voo:
    
 
     #Inserção de informaçoes
-    def definir_dados_voo(self, numero_voo, preco, data_partida, data_chegada, assentos_total):
+    def definir_dados_voo(self, numero_voo, preco, data_partida, data_chegada, assentos_total, comp_aerea):
         self.numero_voo = numero_voo
+        self.comp_aerea = comp_aerea
         self.preco = preco
         self.data_partida = data_partida
         self.data_chegada = data_chegada
@@ -68,7 +72,10 @@ class Voo:
 
    
     def atualizar_voo( self, preco: Optional[float] = None,data_partida: Optional[datetime] = None,
-     data_chegada: Optional[datetime] = None, assentos_total: Optional[int] = None):
+     data_chegada: Optional[datetime] = None, assentos_total: Optional[int] = None, comp_aerea: Optional[str] = None):
+        
+        if comp_aerea is not None:
+            self.comp_aerea = comp_aerea
         
         if preco is not None:
             if preco < 0:
