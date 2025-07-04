@@ -53,4 +53,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Alterna a visibilidade da senha do cadastro
     togglePasswordVisibility(signupPassowordInput, toggleSignupPasswordBtn);
     togglePasswordVisibility(confirmPasswordInput, toggleConfirmPasswordBtn);
+
+
+    // Script para os cards de pacotes
+    const flightCards = document.querySelectorAll('.flight-card-interactive');
+
+    if(flightCards.length > 0){
+        flightCards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('is-expanded')
+            })
+        })
+    }
 });
