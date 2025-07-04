@@ -26,13 +26,14 @@ class Voo:
         'Data de partida': self.data_partida,              
         'Data de chegada': self.data_chegada,
         'Número de assentos': self.assentos_total,
+        'Assentos disponíveis': self.assentos_disp,
         'Preço': self.preco
 
         }
     
     @classmethod
     def from_dict(cls, data):
-        return cls(
+        voo = cls(
            numero_voo = data['Número do voo'],
            comp_aerea = data['Companhia Aérea'],
            data_partida = data['Data de partida'],
@@ -40,6 +41,9 @@ class Voo:
            assentos_total = data['Número de assentos'],
            preco = data['Preço']
         )
+        voo.assentos_disp = data.get('Assentos disponíveis', voo.assentos_total)
+    
+        return voo
     
     # Assentos
     
