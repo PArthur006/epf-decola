@@ -49,6 +49,16 @@ class ControladorVoo(ControladorBase):
                 'numero_voo': 'DB303', 'cidade': 'Gramado', 'preco': '600,00', 
                 'imagem': '/static/img/Gramado.png', 'assentos_disp': 15, 
                 'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 16, 14, 0)
+            },
+            {
+                'numero_voo': 'DB404', 'cidade': 'São Paulo', 'preco': '300,00', 
+                'imagem': '/static/img/SaoPaulo.png', 'assentos_disp': 10, 
+                'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 16, 16, 0)
+            },
+            {
+                'numero_voo': 'DB505', 'cidade': 'Salvador', 'preco': '400,00', 
+                'imagem': '/static/img/Salvador.png', 'assentos_disp': 5, 
+                'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 17, 9, 0)
             }
         ]
         # Renderiza o template 'lista_voos.tpl'
