@@ -24,10 +24,10 @@
             
             % for destino in destinos_populares:
             <div class="cartao">
-                <img src="{{destino['imagem']}}" alt="Foto do destino {{destino['cidade']}}">
+                <img src="{{destino.imagem}}" alt="Foto do destino {{destino.cidade}}">
                 <div class="conteudo-cartao">
-                    <h3>{{destino['cidade']}}</h3>
-                    <p>A partir de R$ {{destino['preco']}}</p>
+                    <h3>{{destino.cidade}}</h3>
+                    <p>A partir de R$ {{destino.preco}}</p>
                 </div>
             </div>
             % end

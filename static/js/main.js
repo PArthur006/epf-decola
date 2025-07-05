@@ -74,4 +74,54 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // ==========================================================================
+    // SEÇÃO 4: LÓGICA DA PÁGINA DE SELEÇÃO DE ASSENTOS
+    // ==========================================================================
+    const mapaAssentos = document.querySelector('.mapa-assentos');
+
+    if (mapaAssentos) {
+        const listaAssentosEl = document.getElementById('listaAssentosSelecionados');
+        const botaoPagarEl = document.getElementById('botaoPagar');
+        
+        mapaAssentos.addEventListener('click', function(event) {
+            const elementoClicado = event.target;
+
+            if (elementoClicado.classList.contains('assento') && elementoClicado.classList.contains('disponivel')) {
+                elementoClicado.classList.toggle('selecionado');
+                atualizarResumoAssentos();
+            }
+        });
+
+        botaoPagarEl.addEventListener('click', function() {
+            // Pega a lista de nomes dos assentos
+            const assentosSelecionados = document.querySelectorAll('.assento.selecionado');
+            const nomesDosAssentos = Array.from(assentosSelecionados).map(assento => assento.dataset.assento);
+            
+            if (nomesDosAssentos.length === 0) {
+                alert('Por favor, selecione pelo menos um assento.');
+                return; // Para a execução se nenhum assento foi selecionado
+            }
+
+            // Pega o ID do voo da URL atual (ex: /assentos/DB101)
+            const urlPath = window.location.pathname.split('/');
+            const idVoo = urlPath[urlPath.length - 1];
+            
+            // Constrói a URL final e redireciona o usuário
+            const urlDestino = `/pagamento/${idVoo}/${nomesDosAssentos.join(',')}`;
+            console.log("Redirecionando para:", urlDestino); // Para debug
+            window.location.href = urlDestino;
+        });
+
+        function atualizarResumoAssentos() {
+            const assentosSelecionados = document.querySelectorAll('.assento.selecionado');
+            const nomesDosAssentos = Array.from(assentosSelecionados).map(assento => assento.dataset.assento);
+
+            if (nomesDosAssentos.length > 0) {
+                listaAssentosEl.textContent = nomesDosAssentos.join(', ');
+            } else {
+                listaAssentosEl.textContent = 'Nenhum';
+            }
+        }
+    }
 });
