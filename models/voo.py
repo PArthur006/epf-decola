@@ -1,52 +1,50 @@
 from datetime import datetime
-from typing import Optional
 import json
 import os
+from .destino import Destino
 
 class Voo:
-    def __init__(self, numero_voo, preco, data_partida, data_chegada, assentos_total, comp_aerea):
+    def __init__(self, numero_voo, preco, data_partida, data_chegada,
+                 assentos_total, comp_aerea, destino: Destino):
         self.numero_voo = numero_voo
         self.preco = preco
         self.data_partida = data_partida
         self.data_chegada = data_chegada
-        self.comp_aerea = comp_aerea
         self.assentos_total = assentos_total
         self.assentos_disp = assentos_total
-        pass 
+        self.comp_aerea = comp_aerea
+        self.destino = destino
 
     def __repr__(self):
-     return (f"Voo(numero_voo={self.numero_voo}, preco='{self.preco}', data_partida='{self.data_partida}', "
-            f"data_chegada='{self.data_chegada}',comp_aerea='{self.comp_aerea}', assentos_total={self.assentos_total}, assentos_disp={self.assentos_disp})")
+        return (f"Voo(numero_voo={self.numero_voo}, preco={self.preco}, "
+                f"data_partida={self.data_partida}, data_chegada={self.data_chegada}, "
+                f"assentos_total={self.assentos_total}, assentos_disp={self.assentos_disp}, "
+                f"comp_aerea='{self.comp_aerea}', destino={self.destino})")
 
-    
     def to_dict(self):
-        return{
-        'Número do voo': self.numero_voo,
-        'Companhia Aérea': self.comp_aerea,
-        'Data de partida': self.data_partida,              
-        'Data de chegada': self.data_chegada,
-        'Número de assentos': self.assentos_total,
-        'Assentos disponíveis': self.assentos_disp,
-        'Preço': self.preco
-
+        return {
+            'Número do voo': self.numero_voo,
+            'Preço': self.preco,
+            'Data de partida': self.data_partida.isoformat(),
+            'Data de chegada': self.data_chegada.isoformat(),
+            'Número de assentos': self.assentos_total,
+            'Assentos disponíveis': self.assentos_disp,
+            'Companhia Aérea': self.comp_aerea,
+            'Destino': self.destino.to_dict()
         }
-    
+
     @classmethod
     def from_dict(cls, data):
-        voo = cls(
-           numero_voo = data['Número do voo'],
-           comp_aerea = data['Companhia Aérea'],
-           data_partida = data['Data de partida'],
-           data_chegada = data['Data de chegada'],
-           assentos_total = data['Número de assentos'],
-           preco = data['Preço']
+        return cls(
+            numero_voo=data['Número do voo'],
+            preco=data['Preço'],
+            data_partida=datetime.fromisoformat(data['Data de partida']),
+            data_chegada=datetime.fromisoformat(data['Data de chegada']),
+            assentos_total=data['Número de assentos'],
+            comp_aerea=data['Companhia Aérea'],
+            destino=Destino.from_dict(data['Destino'])
         )
-        voo.assentos_disp = data.get('Assentos disponíveis', voo.assentos_total)
-    
-        return voo
-    
-    # Assentos
-    
+
     def assentos_disponiveis(self):
         return self.assentos_disp > 0
 
@@ -55,64 +53,12 @@ class Voo:
             self.assentos_disp -= 1
             return True
         return False
-    
+
     def cancel_reserva(self):
         if self.assentos_disp < self.assentos_total:
             self.assentos_disp += 1
             return True
         return False
-       
-   
-
-    #Inserção de informaçoes
-    def definir_dados_voo(self, numero_voo, preco, data_partida, data_chegada, assentos_total, comp_aerea):
-        self.numero_voo = numero_voo
-        self.comp_aerea = comp_aerea
-        self.preco = preco
-        self.data_partida = data_partida
-        self.data_chegada = data_chegada
-        self.assentos_total = assentos_total
-        self.assentos_disp = assentos_total
-
-   
-    def atualizar_voo( self, preco: Optional[float] = None,data_partida: Optional[datetime] = None,
-     data_chegada: Optional[datetime] = None, assentos_total: Optional[int] = None, comp_aerea: Optional[str] = None):
-        
-        if comp_aerea is not None:
-            self.comp_aerea = comp_aerea
-        
-        if preco is not None:
-            if preco < 0:
-                raise ValueError("Preço não pode ser negativo.")
-            self.preco = preco
-
-        if data_partida is not None:
-            self.data_partida = data_partida
-
-        if data_chegada is not None:
-            self.data_chegada = data_chegada
-
-        if self.data_partida and self.data_chegada:
-            if self.data_chegada < self.data_partida:
-                raise ValueError("Data de chegada não pode ser anterior à data de partida.")
-
-        if assentos_total is not None:
-            if assentos_total <= 0:
-                raise ValueError("Número de assentos deve ser maior que zero.")
-
-            reservas_atuais = self.assentos_total - self.assentos_disp
-            if assentos_total < reservas_atuais:
-                raise ValueError(
-                    f"Não é possível reduzir para {assentos_total} assentos. "
-                    f"Já existem {reservas_atuais} reservas feitas."
-                )
-
-            diferenca = assentos_total - self.assentos_total
-            self.assentos_total = assentos_total
-            self.assentos_disp += diferenca
-
-            if self.assentos_disp > self.assentos_total:
-                self.assentos_disp = self.assentos_total
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -135,14 +81,7 @@ class VooModel:
 
     def _save(self):
         with open(self.FILE_PATH, 'w', encoding='utf-8') as f:
-            json.dump([self._format_dates(v.to_dict()) for v in self.voos], f, ensure_ascii=False, indent=4)
-
-    def _format_dates(self, data_dict):
-        if isinstance(data_dict.get('Data de partida'), datetime):
-            data_dict['Data de partida'] = data_dict['Data de partida'].isoformat()
-        if isinstance(data_dict.get('Data de chegada'), datetime):
-            data_dict['Data de chegada'] = data_dict['Data de chegada'].isoformat()
-        return data_dict
+            json.dump([v.to_dict() for v in self.voos], f, ensure_ascii=False, indent=4)
 
     def get_all(self):
         return self.voos
@@ -163,9 +102,9 @@ class VooModel:
 
     def delete(self, numero_voo):
         self.voos = [v for v in self.voos if v.numero_voo != numero_voo]
-        self._save()  
+        self._save()
 
 
 
-
-       
+    
+    

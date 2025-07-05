@@ -16,11 +16,13 @@ class User:
         self.cpf = cpf
         self.nationality = nationality
         self.phone = phone
+        self.reservas = []  # lista de Reserva
 
-    def __repr__(self):
-        return (f"User(id={self.id}, name='{self.name}', email='{self.email}', "
-                f"birthdate='{self.birthdate}', cpf='{self.cpf}', "
-                f"nationality='{self.nationality}', phone='{self.phone}')")
+    def add_reserva(self, reserva):
+        self.reservas.append(reserva)
+
+    def remove_reserva(self, reserva_id):
+        self.reservas = [r for r in self.reservas if r.id_reserva != reserva_id]
 
     def to_dict(self):
         return {
@@ -30,12 +32,13 @@ class User:
             'birthdate': self.birthdate,
             'cpf': self.cpf,
             'nationality': self.nationality,
-            'phone': self.phone
+            'phone': self.phone,
+            'reservas': [r.id_reserva for r in self.reservas]  # armazenar só IDs das reservas
         }
 
     @classmethod
     def from_dict(cls, data):
-        return cls(
+        user = cls(
             user_id=data['id'],
             name=data['name'],
             email=data['email'],
@@ -44,6 +47,8 @@ class User:
             nationality=data['nationality'],
             phone=data.get('phone')
         )
+        # reservas serão ligadas depois pelo modelo
+        return user
 
 class UserModel:
     FILE_PATH = os.path.join(DATA_DIR, 'users.json')

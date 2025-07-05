@@ -3,38 +3,47 @@ import json
 import os
 
 class Pagamento:
-    def __init__(self, id_pagamento, numero_voo, valor, forma_pagamento, status, data_pagamento=None):
+    def __init__(self, id_pagamento, reserva, valor, forma_pagamento, status="Pendente", data_pagamento=None):
         self.id_pagamento = id_pagamento
-        self.numero_voo = numero_voo
+        self.reserva = reserva                      # Associação direta com a instância de Reserva
         self.valor = valor
-        self.forma_pagamento = forma_pagamento  # Ex: 'Cartão', 'PIX', 'Boleto'
-        self.status = status                    # Ex: 'Pendente', 'Pago', 'Cancelado'
+        self.forma_pagamento = forma_pagamento      # Ex: 'Cartão', 'PIX', 'Boleto'
+        self.status = status                        # Ex: 'Pendente', 'Pago', 'Cancelado'
         self.data_pagamento = data_pagamento or datetime.now()
 
     def __repr__(self):
-        return (f"Pagamento(id_pagamento={self.id_pagamento}, numero_voo='{self.numero_voo}', "
+        return (f"Pagamento(id_pagamento={self.id_pagamento}, reserva_id='{self.reserva.id_reserva}', "
                 f"valor={self.valor}, forma_pagamento='{self.forma_pagamento}', "
                 f"status='{self.status}', data_pagamento='{self.data_pagamento}')")
-    
+
+    def confirmar_pagamento(self):
+        self.status = "Pago"
+        self.reserva.pagar(self)
+
+    def cancelar_pagamento(self):
+        self.status = "Cancelado"
+        self.reserva.cancelar()
+
     def to_dict(self):
         return {
             'ID': self.id_pagamento,
-            'Número do voo': self.numero_voo,
+            'ReservaID': self.reserva.id_reserva,
             'Valor': self.valor,
-            'Forma de pagamento': self.forma_pagamento,
+            'FormaPagamento': self.forma_pagamento,
             'Status': self.status,
-            'Data do pagamento': self.data_pagamento.isoformat()
+            'DataPagamento': self.data_pagamento.isoformat()
         }
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data, reserva_lookup):
+        reserva = reserva_lookup(data['ReservaID'])
         return cls(
             id_pagamento=data['ID'],
-            numero_voo=data['Número do voo'],
+            reserva=reserva,
             valor=data['Valor'],
-            forma_pagamento=data['Forma de pagamento'],
+            forma_pagamento=data['FormaPagamento'],
             status=data['Status'],
-            data_pagamento=datetime.fromisoformat(data['Data do pagamento'])
+            data_pagamento=datetime.fromisoformat(data['DataPagamento'])
         )
 
     def atualizar_status(self, novo_status):
@@ -49,31 +58,31 @@ os.makedirs(DATA_DIR, exist_ok=True)
 class PagamentoModel:
     FILE_PATH = os.path.join(DATA_DIR, 'pagamentos.json')
 
-    def __init__(self):
+    def __init__(self, reserva_model):
+        self.reserva_model = reserva_model  # instância de ReservaModel para buscar reservas
         self.pagamentos = self._load()
+
+    def _reserva_lookup(self, reserva_id):
+        return self.reserva_model.get_by_id(reserva_id)
 
     def _load(self):
         if not os.path.exists(self.FILE_PATH):
             return []
         with open(self.FILE_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            for item in data:
-                item['Data do pagamento'] = datetime.fromisoformat(item['Data do pagamento'])
-            return [Pagamento.from_dict(item) for item in data]
+            return [
+                Pagamento.from_dict(item, self._reserva_lookup)
+                for item in data
+            ]
 
     def _save(self):
         with open(self.FILE_PATH, 'w', encoding='utf-8') as f:
-            json.dump([self._format_dates(p.to_dict()) for p in self.pagamentos], f, ensure_ascii=False, indent=4)
-
-    def _format_dates(self, data_dict):
-        if isinstance(data_dict.get('Data do pagamento'), datetime):
-            data_dict['Data do pagamento'] = data_dict['Data do pagamento'].isoformat()
-        return data_dict
+            json.dump([p.to_dict() for p in self.pagamentos], f, ensure_ascii=False, indent=4)
 
     def gerar_proximo_id(self):
         if not self.pagamentos:
             return "PG0001"
-        
+
         ultimos_ids = [
             int(p.id_pagamento.replace("PG", ""))
             for p in self.pagamentos
@@ -89,7 +98,6 @@ class PagamentoModel:
         return next((p for p in self.pagamentos if p.id_pagamento == id_pagamento), None)
 
     def add(self, pagamento: Pagamento):
-        # Sempre gera um novo ID automaticamente ao adicionar
         pagamento.id_pagamento = self.gerar_proximo_id()
         self.pagamentos.append(pagamento)
         self._save()
