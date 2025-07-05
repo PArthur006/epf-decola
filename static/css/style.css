@@ -1,191 +1,15 @@
-/* Reset e Estilos Globais */
-body {
-  font-family: sans-serif;
-  color: var(--text-color);
-  background-color: #f4f7f6;
-  padding: 0;
-  margin: 0;
-}
-
-/* 1. Estilo da Barra de Navegação */
-
-.navbar {
-  background-color: #fff;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  box-shadow: var(--shadow);
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 20px;
-}
-
-.navbar-logo {
-  color: #0056b3;
-  text-decoration: none;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.nav-menu {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  text-align: center;
-}
-
-.nav-links {
-  color: var(--text-color);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-}
-
-.nav-links:hover {
-  color: #007bff;
-}
-
-.btn-signup {
-  padding: 8px 20px;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-}
-
-.btn-signup:hover {
-  background-color: #0056b3;
-  color: #fff;
-}
-
-/* 2. Estilo da Seção Hero */
-.hero {
-  height: calc(100vh - 80px);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: radial-gradient(circle at center, #ffffff 40%, var(--secondary-color));
-
-  background-size: cover;
-  background-position: center;
-}
-
-.hero-logo {
-  max-width: 70%;
-  max-height: 70%;
-  margin: 0 auto;
-  display: block;
-}
-
-/* 3. Estilo da Seção de Pacotes e Cards */
-.packages-section {
-  padding: 50px 0px;
-  text-align: center;
-  position: relative;
-}
-
-.nav-button {
-  position: absolute;
-  top: 60%;
-  transform: translateY(-50%);
-  background-color: #fff;
-  color: var(--text-color);
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 2rem;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-button:hover {
-  background-color: #f0f0f0;
-}
-
-.prev-button {
-  left: 40px;
-}
-
-.next-button {
-  right: 40px;
-}
-
-.packages-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-}
-
-.packages-container {
-  display: flex;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  gap: 20px;
-  padding: 20px;
-  scroll-snap-type: x mandatory;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.packages-container::-webkit-scrollbar {
-  display: none;
-}
-
-.card {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  min-width: 300px;
-  text-align: left;
-  scroll-snap-align: start;
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card-content h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.card-content p {
-  margin: 0;
-  color: #007bff;
-  font-weight: bold;
-}
-
+/* ==========================================================================
+   1. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS
+   ========================================================================== */
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2980b9;
-  --danger-color: #e74c3c;
-  --success-color: #2ecc71;
-  --text-color: #333;
-  --light-gray: #f5f5f5;
-  --border-color: #ddd;
-  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --cor-primaria: #3498db;
+  --cor-secundaria: #2980b9;
+  --cor-perigo: #e74c3c;
+  --cor-sucesso: #2ecc71;
+  --cor-texto: #333;
+  --cinza-claro: #f5f5f5;
+  --cor-borda: #ddd;
+  --sombra-padrao: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -194,63 +18,26 @@ body {
   box-sizing: border-box;
 }
 
+body {
+  font-family: sans-serif;
+  color: var(--cor-texto);
+  background-color: #f4f7f6;
+}
 
-/* Layout */
 .container {
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
   background: white;
   border-radius: 8px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--sombra-padrao);
 }
 
-/* Estilos para Páginas de Formulário (Login/Cadastro) */
 
-.form-page-container {
-  display:  flex;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 20px;
-  min-height: calc(100vh - 80px );
-}
-
-.form-box {
-  width: 100%;
-  max-width: 400px;
-  background: #fff;
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-
-.form-box h2 {
-  margin-top: 0;
-  margin-bottom: 30px;
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.btn-full {
+/* ==========================================================================
+   2. COMPONENTES REUTILIZÁVEIS
+   ========================================================================== */
+.btn-largura-total {
   width: 100%;
   padding: 12px;
   background-color: #007bff;
@@ -262,100 +49,315 @@ body {
   font-weight: bold;
 }
 
-.btn-full:hover {
+.btn-largura-total:hover {
   background-color: #0056b3;
 }
 
-.form-footer {
+
+/* ==========================================================================
+   3. LAYOUT PRINCIPAL E COMPONENTES ESPECÍFICOS
+   ========================================================================== */
+
+/* --- Barra de Navegação --- */
+.barra-navegacao {
+  background-color: #fff;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: var(--sombra-padrao);
+}
+
+.container-barra-navegacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.logo-barra-navegacao {
+  color: #0056b3;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.menu-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+}
+
+.link-nav {
+  color: var(--cor-texto);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.link-nav:hover {
+  color: #007bff;
+}
+
+.btn-cadastro {
+  padding: 8px 20px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-cadastro:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+/* --- Formulários (Login/Cadastro) --- */
+.container-pagina-formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  min-height: calc(100vh - 80px);
+}
+
+.caixa-formulario {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: var(--sombra-padrao);
+  text-align: center;
+}
+
+.caixa-formulario h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.grupo-formulario {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.grupo-formulario label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.grupo-formulario input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+}
+
+.rodape-formulario {
   margin-top: 20px;
   font-size: 0.9em;
 }
 
-.form-footer a {
+.rodape-formulario a {
   color: #007bff;
   text-decoration: none;
   font-weight: bold;
 }
 
-/* Estilos para o botão de mostrar/ocultar senha */
-
-.password-wrapper {
+.wrapper-senha {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.toggle-password {
+.toggle-senha {
   position: absolute;
   right: 10px;
   cursor: pointer;
   user-select: none;
 }
 
-/* Estilos para a página de voos */
 
-.flight-grid {
+/* ==========================================================================
+   4. ESTILOS DE PÁGINAS ESPECÍFICAS
+   ========================================================================== */
+
+/* --- Página Inicial (Hero e Carrossel) --- */
+.secao-hero {
+  height: calc(100vh - 80px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(circle at center, #ffffff 40%, var(--cor-secundaria));
+  background-size: cover;
+  background-position: center;
+}
+
+.logo-hero {
+  max-width: 50%;
+  max-height: 50%;
+  margin: 0 auto;
+  display: block;
+}
+
+.secao-pacotes {
+  padding: 50px 0px;
+  text-align: center;
+  position: relative;
+}
+
+.secao-pacotes h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.container-pacotes {
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-pacotes::-webkit-scrollbar {
+  display: none;
+}
+
+.botao-navegacao {
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  color: var(--cor-texto);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: var(--sombra-padrao);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.botao-navegacao:hover {
+  background-color: #f0f0f0;
+}
+
+.botao-anterior {
+  left: 40px;
+}
+
+.botao-proximo {
+  right: 40px;
+}
+
+.cartao {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: var(--sombra-padrao);
+  overflow: hidden;
+  min-width: 300px;
+  text-align: left;
+  scroll-snap-align: start;
+}
+
+.cartao img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.conteudo-cartao {
+  padding: 15px;
+}
+
+.conteudo-cartao h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.conteudo-cartao p {
+  margin: 0;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* --- Página de Lista de Voos --- */
+.grade-voos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 30px;
   margin-top: 30px;
 }
 
-.flight-card-interactive {
+.cartao-voo-interativo {
   background: #fff;
   border-radius: 8px;
-  box-shadow: var(--shadow);
-  overflow: hidden;;
+  box-shadow: var(--sombra-padrao);
+  overflow: hidden;
   cursor: pointer;
-  transition: all 0.3 ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.flight-card-interactive img {
+.cartao-voo-interativo img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-.flight-card-interactive .card-section {
+.cartao-voo-interativo .secao-cartao {
   padding: 15px 20px;
 }
 
-.flight-card-interactive .basic-info h3 {
+.cartao-voo-interativo .info-basica h3 {
   margin: 0;
-  font-size: 1.5rem;;
+  font-size: 1.5rem;
 }
 
-.flight-card-interactive .basic-info p {
+.cartao-voo-interativo .info-basica p {
   margin: 5px 0 0;
   color: #007bff;
   font-weight: bold;
-  font-size: 1.1rem;;
+  font-size: 1.1rem;
 }
 
-.flight-card-interactive .hover-info, 
-.flight-card-interactive .expanded-info {
+.cartao-voo-interativo .info-hover, 
+.cartao-voo-interativo .info-expandida {
   opacity: 0;
   max-height: 0;
   overflow: hidden;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 0 20px;
   margin: 0;
   transition: all 0.35s ease-in-out;
 }
 
-.flight-card-interactive:hover {
+.cartao-voo-interativo:hover {
   transform: scale(1.03);
   z-index: 10;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-.flight-card-interactive:hover .hover-info {
+.cartao-voo-interativo:hover .info-hover {
   opacity: 1;
   max-height: 100px;
-  padding: 15px 20px;
+  padding-top: 15px;
 }
 
-.flight-card-interactive.is-expanded .expanded-info {
+.cartao-voo-interativo.esta-expandido .info-expandida {
   opacity: 1;
   max-height: 200px;
   padding: 20px;
@@ -366,10 +368,9 @@ body {
   gap: 12px;
 }
 
-.flight-card-interactive.is-expanded:hover .hover-info {
+.cartao-voo-interativo.esta-expandido:hover .info-hover {
   opacity: 0;
   max-height: 0;
   padding-top: 0;
-  padding-bottom: 0;
   margin: 0;
 }

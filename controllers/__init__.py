@@ -1,14 +1,17 @@
-from bottle import Bottle
-from controllers.user_controller import user_routes
-from .user_controller import UserController
-from .auth_controller import AuthController
-from .flight_controller import FlightController
+from .controlador_usuario import ControladorUsuario
+from .controlador_autenticacao import ControladorAutenticacao
+from .controlador_voo import ControladorVoo
 
-
-def init_controllers(app: Bottle):
-    app.merge(user_routes)
-    user_controller = UserController(app)
-
-    auth_controller = AuthController(app)
-
-    flight_controller = FlightController(app)
+def init_controllers(app):
+    """
+    Inicializa todos os controllers, passando a instância da aplicação Bottle.
+    Esta função é chamada uma vez quando a aplicação inicia.
+    """
+    print("-> Inicializando controllers...")
+    
+    # Cria uma instância de cada controller, registrando suas rotas na aplicação
+    controlador_usuario = ControladorUsuario(app)
+    controlador_autenticacao = ControladorAutenticacao(app)
+    controlador_voo = ControladorVoo(app)
+    
+    print("✅ Controllers inicializados.")
