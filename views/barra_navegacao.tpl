@@ -1,3 +1,4 @@
+<!-- Barra de Navegação  -->
 <nav class="barra-navegacao">
     <div class="container-barra-navegacao">
         <a href="/" class="logo-barra-navegacao">Decola-BR</a>
