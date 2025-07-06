@@ -25,5 +25,14 @@
         "Status": "Confirmada",
         "DataReserva": "2025-07-05T22:25:32.271804",
         "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U002A11",
+        "UserID": "U002",
+        "NumeroVoo": "DB101",
+        "Assento": "A11",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T16:58:26.542071",
+        "PagamentoID": null
     }
 ]

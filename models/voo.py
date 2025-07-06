@@ -12,6 +12,7 @@ class Voo:
         self.data_chegada = data_chegada
         self.assentos_total = assentos_total
         self.assentos_disp = assentos_total
+        self.assentos_ocupados = []  # lista de assentos já reservados
         self.comp_aerea = comp_aerea
         self.destino = destino
 
@@ -29,13 +30,14 @@ class Voo:
             'Data de chegada': self.data_chegada.isoformat(),
             'Número de assentos': self.assentos_total,
             'Assentos disponíveis': self.assentos_disp,
+            'Assentos ocupados': self.assentos_ocupados,
             'Companhia Aérea': self.comp_aerea,
             'Destino': self.destino.to_dict()
         }
 
     @classmethod
     def from_dict(cls, data):
-        return cls(
+        voo = cls(
             numero_voo=data['Número do voo'],
             preco=data['Preço'],
             data_partida=datetime.fromisoformat(data['Data de partida']),
@@ -44,21 +46,26 @@ class Voo:
             comp_aerea=data['Companhia Aérea'],
             destino=Destino.from_dict(data['Destino'])
         )
-
+        voo.assentos_ocupados = data.get('Assentos ocupados', [])
+        return voo
+    
     def assentos_disponiveis(self):
         return self.assentos_disp > 0
 
-    def reserva(self):
-        if self.assentos_disp > 0:
+    def reservar(self, assento):
+        if assento not in self.assentos_ocupados:
+            self.assentos_ocupados.append(assento)
             self.assentos_disp -= 1
             return True
         return False
 
-    def cancel_reserva(self):
-        if self.assentos_disp < self.assentos_total:
-            self.assentos_disp += 1
-            return True
+    def cancela_reserva(self, assento):
+        if assento in self.assentos_ocupados:
+         self.assentos_ocupados.remove(assento)
+         self.assentos_disp += 1
+         return True
         return False
+
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 os.makedirs(DATA_DIR, exist_ok=True)

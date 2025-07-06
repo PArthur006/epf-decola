@@ -8,6 +8,21 @@
         "cpf": "000.000.000-00",
         "nationality": "N/A",
         "phone": null,
+        "reservas": [
+            "RDB101U001C1",
+            "RDB101U001C2",
+            "RDB101U001C3"
+        ]
+    },
+    {
+        "id": "U002",
+        "name": "Fernada L",
+        "email": "testeA@gmail.com",
+        "password": "1111",
+        "birthdate": "N/A",
+        "cpf": "000.000.000-00",
+        "nationality": "N/A",
+        "phone": null,
         "reservas": []
     }
 ]

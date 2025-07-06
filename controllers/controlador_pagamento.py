@@ -44,33 +44,43 @@ class ControladorPagamento(ControladorBase):
         return self.renderizar('pagamento', reserva=reserva_objeto, titulo="Pagamento")
 
     def efetuar_pagamento(self, id_voo, assentos_selecionados):
-        id_usuario_logado = self.obter_usuario_logado()
-        if not id_usuario_logado:
-            return self.redirecionar('/login', erro="Você precisa estar logado para completar a compra.")
-        
-        usuario = self.user_model.get_by_id(id_usuario_logado)
-        voo = self.voo_model.get_by_numero_voo(id_voo)
-        
-        reservas_criadas = []
-        for assento in assentos_selecionados.split(','):
-            id_reserva_nova = f"R{voo.numero_voo}{usuario.id}{assento}" 
-            
-            nova_reserva = Reserva(
-                id_reserva=id_reserva_nova,
-                user=usuario,
-                voo=voo,
-                assento=assento,
-                status="Confirmada"
+      id_usuario_logado = self.obter_usuario_logado()
+      if not id_usuario_logado:
+          return self.redirecionar('/login', erro="Você precisa estar logado para completar a compra.")
+
+      usuario = self.user_model.get_by_id(id_usuario_logado)
+      voo = self.voo_model.get_by_numero_voo(id_voo)
+      reservas_criadas = []
+
+      for assento in assentos_selecionados.split(','):
+          if assento in voo.assentos_ocupados:
+             return f"Erro: O assento {assento} já está reservado."
+
+          sucesso = voo.reservar(assento)  # Aqui você chama seu método reservar correto
+          if not sucesso:
+              return f"Erro ao reservar o assento {assento}."
+
+          id_reserva_nova = f"R{voo.numero_voo}{usuario.id}{assento}"
+
+          nova_reserva = Reserva(
+              id_reserva=id_reserva_nova,
+              user=usuario,
+              voo=voo,
+              assento=assento,
+              status="Confirmada"
             )
-            self.reserva_model.add(nova_reserva)
-            reservas_criadas.append(nova_reserva)
+          self.reserva_model.add(nova_reserva)
+          reservas_criadas.append(nova_reserva)
 
-        pagamento = Pagamento(
-            id_pagamento=None,
-            reserva=reservas_criadas[0], 
-            valor=voo.preco * len(reservas_criadas),
-            forma_pagamento='Cartão de Crédito'
+      # Salva o estado atualizado do voo
+      self.voo_model.update(voo)
+
+      pagamento = Pagamento(
+         id_pagamento=None,
+         reserva=reservas_criadas[0],  # Associa o pagamento à primeira reserva
+         valor=voo.preco * len(reservas_criadas),
+         forma_pagamento='Cartão de Crédito'
         )
-        self.pagamento_model.add(pagamento)
+      self.pagamento_model.add(pagamento)
 
-        return f"Pagamento de R$ {pagamento.valor} efetuado com sucesso para as reservas!"
+      return f"Pagamento de R$ {pagamento.valor} efetuado com sucesso para as reservas!"
