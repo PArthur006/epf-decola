@@ -1,8 +1,13 @@
 [
     {
-        "id": 1,
-        "name": "UsuÃ¡rio Teste",
-        "email": "uduarioteste@email.com",
-        "birthdate": "1999-10-21"
+        "id": "U001",
+        "name": "Pedro Arthur",
+        "email": "teste@gmail.com",
+        "password": "123456",
+        "birthdate": "N/A",
+        "cpf": "000.000.000-00",
+        "nationality": "N/A",
+        "phone": null,
+        "reservas": []
     }
 ]

@@ -15,10 +15,11 @@
         <div class="grade-voos">
             % for voo in voos:
             <div class="cartao-voo-interativo" data-voo-id="{{voo.numero_voo}}">
-                <img src="{{voo.imagem}}" alt="Foto do destino {{voo.cidade}}">
+                
+                <img src="{{voo.destino.imagem}}" alt="Foto do destino {{voo.destino.cidade}}">
                 
                 <div class="secao-cartao info-basica">
-                    <h3>{{voo.cidade}}</h3>
+                    <h3>{{voo.destino.cidade}}</h3>
                     <p>A partir de R$ {{voo.preco}}</p>
                 </div>
 

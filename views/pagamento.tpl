@@ -17,26 +17,25 @@
                 <h3>Resumo da sua Viagem</h3>
                 <div class="item-resumo">
                     <span>Voo</span>
-                    <p>{{reserva['voo']['cidade_origem']}} → {{reserva['voo']['cidade_destino']}}</p>
+                    <p>{{reserva.voo.destino.cidade}}</p>
                 </div>
                 <div class="item-resumo">
                     <span>Data</span>
-                    <p>{{reserva['voo']['data_partida']}} às {{reserva['voo']['horario_embarque']}}</p>
+                    <p>{{reserva.voo.data_partida.strftime('%d/%m/%Y')}} às {{reserva.voo.data_partida.strftime('%H:%M')}}</p>
                 </div>
                 <div class="item-resumo">
                     <span>Assentos</span>
-                    <p><b>{{ ', '.join(reserva['assentos']) }}</b></p>
+                    <p><b>{{ ', '.join(reserva.assentos) }}</b></p>
                 </div>
                 <hr>
                 <div class="item-resumo total-compra">
                     <span>Total</span>
-                    <p>R$ {{ '%.2f' % reserva['custo']['total'] }}</p>
-                </div>
+                    <p>R$ {{ '%.2f' % reserva.custo['total'] }}</p> </div>
             </div>
 
             <div class="formulario-pagamento">
                 <h3>Dados do Cartão de Crédito</h3>
-                <form action="/finalizar-pagamento" method="post">
+                <form action="/pagamento/{{reserva.voo.numero_voo}}/{{','.join(reserva.assentos)}}" method="post">
                     <div class="grupo-formulario">
                         <label for="nomeCartao">Nome no Cartão</label>
                         <input type="text" id="nomeCartao" name="nomeCartao" required>

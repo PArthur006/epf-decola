@@ -1,105 +1,52 @@
-from datetime import datetime
+# controllers/controlador_voo.py (VERSÃO INTEGRADA)
+
 from .controlador_base import ControladorBase
-from types import SimpleNamespace
-
-DADOS_VOOS = {
-
-    'DB101': {
-
-        'cidade': 'Rio de Janeiro', 'preco': '480,00', 'imagem': '/static/img/RioDeJaneiro.png',
-
-        'assentos_total': 150, 'assentos_ocupados': ['A2', 'C1', 'D5', 'F10'], 
-
-        'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 15, 8, 30)
-
-    },
-
-    'DB202': {
-
-        'cidade': 'Fernando de Noronha', 'preco': '1.200,00', 'imagem': '/static/img/FernandoDeNoronha.png',
-
-        'assentos_total': 120, 'assentos_ocupados': ['A1', 'A2', 'A10', 'C14', 'D25'],
-
-        'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 15, 10, 0)
-
-    },
-
-    'DB303': {
-
-        'cidade': 'Gramado', 'preco': '600,00', 'imagem': '/static/img/Gramado.png',
-
-        'assentos_total': 150, 'assentos_ocupados': ['F1', 'F2', 'E3', 'D4', 'C5', 'B6', 'A7'],
-
-        'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 16, 14, 0)
-
-    },
-
-    'DB404': {
-
-        'cidade': 'São Paulo', 'preco': '350,00', 'imagem': '/static/img/SaoPaulo.png',
-
-        'assentos_total': 180, 'assentos_ocupados': [],
-
-        'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 16, 16, 30)
-
-    },
-
-    'DB505': {
-
-        'cidade': 'Salvador', 'preco': '400,00', 'imagem': '/static/img/Salvador.png',
-
-        'assentos_total': 200, 'assentos_ocupados': ['A1', 'B2', 'C3', 'D4', 'E5', 'F6'],
-
-        'comp_aerea': 'Decola-BR', 'data_partida': datetime(2025, 8, 17, 9, 0)
-
-    }
-
-}
-
+from models.voo import VooModel # Importa o Model real
 
 class ControladorVoo(ControladorBase):
-    def __init__(self, app):
+    """
+    Controller responsável pelas rotas de visualização de voos e assentos.
+    """
+    def __init__(self, app, voo_model: VooModel):
         super().__init__(app)
+        # Recebe a instância do VooModel para poder acessar os dados
+        self.voo_model = voo_model
         self.configurar_rotas()
 
     def configurar_rotas(self):
+        """Define as rotas de voos, incluindo a página inicial."""
         self.app.route('/', method='GET', callback=self.pagina_inicial)
         self.app.route('/voos', method='GET', callback=self.listar_voos)
         self.app.route('/assentos/<id_voo>', method='GET', callback=self.selecionar_assentos)
 
     def pagina_inicial(self):
-        destinos_formatados = []
-        for id_voo, dados in DADOS_VOOS.items():
-            destino = dados.copy()
-            destino['id'] = id_voo
-            destinos_formatados.append(SimpleNamespace(**destino))
-        return self.renderizar('pagina_inicial', destinos_populares=destinos_formatados)
+        """Renderiza a página inicial, que também lista os voos."""
+        # A página inicial agora funciona como a principal vitrine de voos
+        return self.listar_voos(template='pagina_inicial')
 
-    def listar_voos(self):
-        voos_preparados = []
-        for id_voo, dados in DADOS_VOOS.items():
-            assentos_disp = dados['assentos_total'] - len(dados['assentos_ocupados'])
-            voo_com_id = dados.copy()
-            voo_com_id['numero_voo'] = id_voo
-            voo_com_id['assentos_disp'] = assentos_disp
-            voo_objeto = SimpleNamespace(**voo_com_id)
-            voos_preparados.append(voo_objeto)
-        return self.renderizar('lista_voos', voos=voos_preparados, titulo="Voos Disponíveis")
+    def listar_voos(self, template='lista_voos'):
+        """Busca todos os voos no VooModel e os exibe."""
+        # Chama o model para pegar a lista de OBJETOS de voo
+        todos_os_voos = self.voo_model.get_all()
+        # Renderiza o template, passando a lista de objetos
+        return self.renderizar(template, voos=todos_os_voos, destinos_populares=todos_os_voos, titulo="Voos Disponíveis")
 
     def selecionar_assentos(self, id_voo):
-        # Usa o id_voo da URL para pegar os dados do voo correto
-        dados_voo = DADOS_VOOS.get(id_voo)
+        """Busca um voo específico e renderiza o mapa de assentos."""
+        voo_especifico = self.voo_model.get_by_numero_voo(id_voo)
 
-        if not dados_voo:
+        if not voo_especifico:
             return "Voo não encontrado!"
 
-        # Usa a lista de 'assentos_ocupados' específica daquele voo
+        # Prepara os dados do avião para o template
+        # ATENÇÃO: A lógica de layout (fileiras, corredor) ainda é um exemplo.
+        # A lista de assentos ocupados viria do objeto 'voo_especifico' no futuro.
         aviao_para_template = {
             'modelo': 'Airbus A320 (Exemplo)',
             'fileiras': 25,
             'layout': ['A', 'B', 'C', None, 'D', 'E', 'F'],
-            'assentos_ocupados': dados_voo['assentos_ocupados'],
+            'assentos_ocupados': [], # TODO: O model de Voo precisa ter uma lista de assentos ocupados
             'fileiras_saida': [10, 11]
         }
         
-        return self.renderizar('mapa_assentos', aviao=aviao_para_template, titulo=f"Selecione seu assento - Voo {id_voo}")
+        return self.renderizar('mapa_assentos', voo=voo_especifico, aviao=aviao_para_template, titulo=f"Selecione seu assento - Voo {id_voo}")

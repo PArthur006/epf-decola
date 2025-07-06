@@ -1,0 +1,10 @@
+[
+    {
+        "ID": "PG0001",
+        "ReservaID": "RDB101U001C1",
+        "Valor": 1440.0,
+        "FormaPagamento": "Cartão de Crédito",
+        "Status": "Pendente",
+        "DataPagamento": "2025-07-05T22:25:32.272510"
+    }
+]

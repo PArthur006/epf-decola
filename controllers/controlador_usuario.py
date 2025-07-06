@@ -1,11 +1,13 @@
 from bottle import request
 from .controlador_base import ControladorBase
+from models.user import UserModel, User
 
 class ControladorUsuario(ControladorBase):
 
     def __init__(self, app):
         super().__init__(app)
         self.configurar_rotas()
+        self.user_model = UserModel()
 
     def configurar_rotas(self):
         """Define as rotas de CRUD de usuário."""
@@ -15,15 +17,8 @@ class ControladorUsuario(ControladorBase):
         self.app.route('/usuarios/deletar/<id_usuario>', method='POST', callback=self.deletar_usuario)
 
     def listar_usuarios(self):
-        """Busca todos os usuários e renderiza a página de listagem."""
-        # TODO: A linha abaixo será descomentada quando o ServicoUsuario estiver pronto.
-        # usuarios = self.servico_usuario.obter_todos()
-        
-        # Por enquanto, usei uma lista vazia para não dar erro no template.
-        usuarios_exemplo = []
-        
-        # Renderiza o template 'usuarios.tpl' (que precisaria ser criado)
-        return self.renderizar('usuarios', usuarios=usuarios_exemplo, titulo="Lista de Usuários")
+        usuarios = self.user_model.get_all()
+        return self.renderizar('usuarios', usuarios=usuarios, titulo="Lista de Usuários")
 
     def adicionar_usuario(self):
         """Lida com a adição de um novo usuário."""

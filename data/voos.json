@@ -1,0 +1,62 @@
+[
+    {
+        "Número do voo": "DB101",
+        "Preço": 480.0,
+        "Data de partida": "2025-08-15T08:30:00",
+        "Data de chegada": "2025-08-15T10:00:00",
+        "Número de assentos": 150,
+        "Assentos disponíveis": 150,
+        "Companhia Aérea": "Decola-BR",
+        "Destino": {
+            "Cidade": "Rio de Janeiro",
+            "País": "Brasil",
+            "Aeroporto": "GIG",
+            "Imagem": "/static/img/RioDeJaneiro.png"
+        }
+    },
+    {
+        "Número do voo": "DB202",
+        "Preço": 1200.0,
+        "Data de partida": "2025-08-15T10:00:00",
+        "Data de chegada": "2025-08-15T12:30:00",
+        "Número de assentos": 120,
+        "Assentos disponíveis": 120,
+        "Companhia Aérea": "Decola-BR",
+        "Destino": {
+            "Cidade": "Fernando de Noronha",
+            "País": "Brasil",
+            "Aeroporto": "FEN",
+            "Imagem": "/static/img/FernandoDeNoronha.png"
+        }
+    },
+    {
+        "Número do voo": "DB303",
+        "Preço": 600.0,
+        "Data de partida": "2025-08-16T14:00:00",
+        "Data de chegada": "2025-08-16T15:30:00",
+        "Número de assentos": 150,
+        "Assentos disponíveis": 150,
+        "Companhia Aérea": "Decola-BR",
+        "Destino": {
+            "Cidade": "Gramado",
+            "País": "Brasil",
+            "Aeroporto": "CXJ",
+            "Imagem": "/static/img/Gramado.png"
+        }
+    },
+    {
+        "Número do voo": "DB404",
+        "Preço": 750.0,
+        "Data de partida": "2025-08-16T16:00:00",
+        "Data de chegada": "2025-08-16T18:30:00",
+        "Número de assentos": 130,
+        "Assentos disponíveis": 130,
+        "Companhia Aérea": "Decola-BR",
+        "Destino": {
+            "Cidade": "Salvador",
+            "País": "Brasil",
+            "Aeroporto": "SSA",
+            "Imagem": "/static/img/Salvador.png"
+        }
+    }
+]

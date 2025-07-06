@@ -22,12 +22,12 @@
 
         <div class="container-pacotes" id="containerPacotes">
             
-            % for destino in destinos_populares:
+            % for voo in destinos_populares:
             <div class="cartao">
-                <img src="{{destino.imagem}}" alt="Foto do destino {{destino.cidade}}">
+                <img src="{{voo.destino.imagem}}" alt="Foto do destino {{voo.destino.cidade}}">
                 <div class="conteudo-cartao">
-                    <h3>{{destino.cidade}}</h3>
-                    <p>A partir de R$ {{destino.preco}}</p>
+                    <h3>{{voo.destino.cidade}}</h3>
+                    <p>A partir de R$ {{voo.preco}}</p>
                 </div>
             </div>
             % end
