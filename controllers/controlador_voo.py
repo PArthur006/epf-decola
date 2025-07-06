@@ -26,27 +26,26 @@ class ControladorVoo(ControladorBase):
 
     def listar_voos(self, template='lista_voos'):
         """Busca todos os voos no VooModel e os exibe."""
+        self.voo_model.reload()  #  Recarrega dados atualizados do disco
         # Chama o model para pegar a lista de OBJETOS de voo
         todos_os_voos = self.voo_model.get_all()
         # Renderiza o template, passando a lista de objetos
         return self.renderizar(template, voos=todos_os_voos, destinos_populares=todos_os_voos, titulo="Voos Disponíveis")
 
     def selecionar_assentos(self, id_voo):
-        """Busca um voo específico e renderiza o mapa de assentos."""
-        voo_especifico = self.voo_model.get_by_numero_voo(id_voo)
+      """Busca um voo específico e renderiza o mapa de assentos."""
+      voo_especifico = self.voo_model.get_by_numero_voo(id_voo)
 
-        if not voo_especifico:
-            return "Voo não encontrado!"
+      if not voo_especifico:
+          return "Voo não encontrado!"
 
-        # Prepara os dados do avião para o template
-        # ATENÇÃO: A lógica de layout (fileiras, corredor) ainda é um exemplo.
-        # A lista de assentos ocupados viria do objeto 'voo_especifico' no futuro.
-        aviao_para_template = {
+      # Prepara os dados do avião para o template
+      aviao_para_template = {
             'modelo': 'Airbus A320 (Exemplo)',
             'fileiras': 25,
             'layout': ['A', 'B', 'C', None, 'D', 'E', 'F'],
-            'assentos_ocupados': [], # TODO: O model de Voo precisa ter uma lista de assentos ocupados
+            'assentos_ocupados': voo_especifico.assentos_ocupados,  # <-- AQUI
             'fileiras_saida': [10, 11]
         }
-        
-        return self.renderizar('mapa_assentos', voo=voo_especifico, aviao=aviao_para_template, titulo=f"Selecione seu assento - Voo {id_voo}")
+
+      return self.renderizar('mapa_assentos', voo=voo_especifico, aviao=aviao_para_template, titulo=f"Selecione seu assento - Voo {id_voo}")

@@ -52,5 +52,104 @@
         "Status": "Confirmada",
         "DataReserva": "2025-07-06T20:12:37.154432",
         "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U002A11",
+        "UserID": "U002",
+        "NumeroVoo": "DB101",
+        "Assento": "A11",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T16:58:26.542071",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U002B7",
+        "UserID": "U002",
+        "NumeroVoo": "DB101",
+        "Assento": "B7",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T18:16:54.573943",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U002A13",
+        "UserID": "U002",
+        "NumeroVoo": "DB101",
+        "Assento": "A13",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T18:21:19.243673",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U002B18",
+        "UserID": "U002",
+        "NumeroVoo": "DB101",
+        "Assento": "B18",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T18:23:03.238640",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U002B13",
+        "UserID": "U002",
+        "NumeroVoo": "DB101",
+        "Assento": "B13",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T18:24:26.671941",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U002F1",
+        "UserID": "U002",
+        "NumeroVoo": "DB101",
+        "Assento": "F1",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T18:31:14.598108",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB202U002A1",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "A1",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T19:01:41.445107",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB202U002B1",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "B1",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T19:02:23.301309",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB202U002C1",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "C1",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T19:09:19.114611",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB202U002A2",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "A2",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T19:10:20.746807",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB202U002A25",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "A25",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T19:26:35.325816",
+        "PagamentoID": null
     }
 ]
