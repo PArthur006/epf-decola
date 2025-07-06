@@ -1,0 +1,29 @@
+[
+    {
+        "ID": "RDB101U001C1",
+        "UserID": "U001",
+        "NumeroVoo": "DB101",
+        "Assento": "C1",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-05T22:25:32.271022",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U001C2",
+        "UserID": "U001",
+        "NumeroVoo": "DB101",
+        "Assento": "C2",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-05T22:25:32.271437",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U001C3",
+        "UserID": "U001",
+        "NumeroVoo": "DB101",
+        "Assento": "C3",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-05T22:25:32.271804",
+        "PagamentoID": null
+    }
+]

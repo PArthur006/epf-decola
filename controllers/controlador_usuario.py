@@ -1,0 +1,54 @@
+from bottle import request
+from .controlador_base import ControladorBase
+from models.user import UserModel, User
+
+class ControladorUsuario(ControladorBase):
+
+    def __init__(self, app):
+        super().__init__(app)
+        self.configurar_rotas()
+        self.user_model = UserModel()
+
+    def configurar_rotas(self):
+        """Define as rotas de CRUD de usuário."""
+        self.app.route('/usuarios', method='GET', callback=self.listar_usuarios)
+        self.app.route('/usuarios/adicionar', method=['GET', 'POST'], callback=self.adicionar_usuario)
+        self.app.route('/usuarios/editar/<id_usuario>', method=['GET', 'POST'], callback=self.editar_usuario)
+        self.app.route('/usuarios/deletar/<id_usuario>', method='POST', callback=self.deletar_usuario)
+
+    def listar_usuarios(self):
+        usuarios = self.user_model.get_all()
+        return self.renderizar('usuarios', usuarios=usuarios, titulo="Lista de Usuários")
+
+    def adicionar_usuario(self):
+        """Lida com a adição de um novo usuário."""
+        if request.method == 'GET':
+            # Mostra o formulário de adição.
+            return self.renderizar('formulario_usuario', usuario=None, acao="/usuarios/adicionar")
+        else: # POST
+            # TODO: Aqui entrará a chamada para o serviço para salvar o novo usuário.
+            print("Formulário de adição recebido. Redirecionando...")
+            self.redirecionar('/usuarios')
+
+    def editar_usuario(self, id_usuario):
+        """Lida com a edição de um usuário existente."""
+        # TODO: Aqui entrará a chamada para o serviço para buscar o usuário pelo ID.
+        
+        # Por enquanto, usamos um dicionário vazio como dado de exemplo.
+        usuario_exemplo = {'id': id_usuario, 'name': 'Usuário de Teste', 'email': 'teste@email.com'}
+        
+        if not usuario_exemplo: # A verificação continuará funcionando
+            return "Usuário não encontrado"
+
+        if request.method == 'GET':
+            # Mostra o formulário preenchido com os dados do usuário.
+            return self.renderizar('formulario_usuario', usuario=usuario_exemplo, acao=f"/usuarios/editar/{id_usuario}")
+        else: # POST
+            # TODO: Aqui entrará a chamada para o serviço para salvar as alterações.
+            print(f"Formulário de edição para o usuário {id_usuario} recebido. Redirecionando...")
+            self.redirecionar('/usuarios')
+
+    def deletar_usuario(self, id_usuario):
+        # TODO: Aqui entrará a chamada para o serviço para deletar o usuário.
+        print(f"Requisição para deletar o usuário {id_usuario} recebida. Redirecionando...")
+        self.redirecionar('/usuarios')

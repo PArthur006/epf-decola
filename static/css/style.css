@@ -1,13 +1,16 @@
-/* Reset e Estilos Globais */
+/* ==========================================================================
+   1. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS
+   ========================================================================== */
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2980b9;
-  --danger-color: #e74c3c;
-  --success-color: #2ecc71;
-  --text-color: #333;
-  --light-gray: #f5f5f5;
-  --border-color: #ddd;
-  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --cor-primaria: #3498db;
+  --cor-secundaria: #2980b9;
+  --cor-perigo: #e74c3c;
+  --cor-sucesso: #2ecc71;
+  --cor-texto: #333;
+  --cinza-claro: #f5f5f5;
+  --cor-borda: #ddd;
+  --cor-hover: #007bff;
+  --sombra-padrao: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -17,21 +20,525 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: #f9f9f9;
-  padding: 0;
-  margin: 0;
+  font-family: sans-serif;
+  color: var(--cor-texto);
+  background-color: #f4f7f6;
 }
 
-/* Layout */
 .container {
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
   background: white;
   border-radius: 8px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--sombra-padrao);
 }
 
+
+/* ============================
+   2. COMPONENTES REUTILIZÁVEIS
+   ============================*/
+.btn-largura-total {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--cor-hover);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-largura-total:hover {
+  background-color: #0056b3;
+}
+
+
+/* =============================================
+   3. LAYOUT PRINCIPAL E COMPONENTES ESPECÍFICOS
+   ============================================= */
+
+/* --- Barra de Navegação --- */
+.barra-navegacao {
+  background-color: #fff;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: var(--sombra-padrao);
+}
+
+.container-barra-navegacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.logo-barra-navegacao {
+  color: #0056b3;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.menu-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+}
+
+.link-nav {
+  color: var(--cor-texto);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.link-nav:hover {
+  color: var(--cor-hover)
+}
+
+.btn-cadastro {
+  padding: 8px 20px;
+  border-radius: 4px;
+  background-color: var(--cor-hover);
+  color: #fff;
+  border: none;
+}
+
+.btn-cadastro:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+/* --- Formulários (Login/Cadastro) --- */
+.container-pagina-formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  min-height: calc(100vh - 80px);
+}
+
+.caixa-formulario {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: var(--sombra-padrao);
+  text-align: center;
+}
+
+.caixa-formulario h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.grupo-formulario {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.grupo-formulario label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.grupo-formulario input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+}
+
+.rodape-formulario {
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+.rodape-formulario a {
+  color: var(--cor-hover);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.wrapper-senha {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-senha {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+/* =================================
+   4. ESTILOS DE PÁGINAS ESPECÍFICAS
+   =================================*/
+
+/* --- Página Inicial (Hero e Carrossel) --- */
+.secao-hero {
+  height: calc(100vh - 80px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(circle at center, #ffffff 40%, var(--cor-secundaria));
+  background-size: cover;
+  background-position: center;
+}
+
+.logo-hero {
+  max-width: 50%;
+  max-height: 50%;
+  margin: 0 auto;
+  display: block;
+}
+
+.secao-pacotes {
+  padding: 50px 0px;
+  text-align: center;
+  position: relative;
+}
+
+.secao-pacotes h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.container-pacotes {
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-pacotes::-webkit-scrollbar {
+  display: none;
+}
+
+.botao-navegacao {
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  color: var(--cor-texto);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: var(--sombra-padrao);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.botao-navegacao:hover {
+  background-color: #f0f0f0;
+}
+
+.botao-anterior {
+  left: 40px;
+}
+
+.botao-proximo {
+  right: 40px;
+}
+
+.cartao {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: var(--sombra-padrao);
+  overflow: hidden;
+  min-width: 300px;
+  text-align: left;
+  scroll-snap-align: start;
+}
+
+.cartao img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.conteudo-cartao {
+  padding: 15px;
+}
+
+.conteudo-cartao h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.conteudo-cartao p {
+  margin: 0;
+  color: var(--cor-hover);
+  font-weight: bold;
+}
+
+/* --- Página de Lista de Voos --- */
+.grade-voos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.cartao-voo-interativo {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: var(--sombra-padrao);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.cartao-voo-interativo img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cartao-voo-interativo .secao-cartao {
+  padding: 15px 20px;
+}
+
+.cartao-voo-interativo .info-basica h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.cartao-voo-interativo .info-basica p {
+  margin: 5px 0 0;
+  color: var(--cor-hover);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cartao-voo-interativo .info-hover, 
+.cartao-voo-interativo .info-expandida {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  margin: 0;
+  transition: all 0.35s ease-in-out;
+}
+
+.cartao-voo-interativo:hover {
+  transform: scale(1.03);
+  z-index: 10;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.cartao-voo-interativo:hover .info-hover {
+  opacity: 1;
+  max-height: 100px;
+  padding-top: 15px;
+}
+
+.cartao-voo-interativo.esta-expandido .info-expandida {
+  opacity: 1;
+  max-height: 200px;
+  padding: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cartao-voo-interativo.esta-expandido:hover .info-hover {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  margin: 0;
+}
+
+
+/* --- Página de Mapa de Assentos --- */
+.container-aviao {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aviao {
+    background: #e9ecef;
+    border: 3px solid #adb5bd;
+    border-radius: 20px 20px 5px 5px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.secao-aviao {
+    font-weight: bold;
+    color: #888;
+    margin: 15px 0;
+}
+
+.asas-aviao {
+    grid-column: 1 / -1;
+    text-align: center;
+    background: #e0e0e0;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+.mapa-assentos { /* O layout será 3 assentos, corredor, 3 assentos */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.assento, .corredor {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.assento {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.assento.disponivel {
+    background-color: #ced4da;
+}
+
+.assento.disponivel:hover {
+    border-color: var(--cor-hover);
+}
+
+.assento.ocupado {
+    background-color: var(--cor-perigo); 
+    color: white;
+    cursor: not-allowed;
+}
+
+.assento.selecionado {
+    background-color: var(--cor-sucesso); 
+    color: white;
+    border-color: #28a745;
+}
+
+.corredor {
+    color: #adb5bd;
+}
+
+.marcador-saida {
+    grid-column: 1 / -1; 
+    text-align: center;
+    margin: 10px 0;
+    padding: 5px;
+    background: #f8f9fa;
+    color: #6c757d;
+    font-weight: bold;
+    border-top: 1px dashed #6c757d;
+    border-bottom: 1px dashed #6c757d;
+}
+
+.resumo-reserva {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.info-assentos-selecionados {
+    font-size: 1.2rem;
+}
+
+.resumo-reserva .btn-largura-total {
+    width: auto; 
+    padding: 10px 30px;
+}
+
+
+/* --- Página de Pagamento --- */
+.layout-pagamento {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.resumo-compra {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.resumo-compra h3 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--cor-borda);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.item-resumo {
+    margin-bottom: 20px;
+}
+
+.item-resumo span {
+    color: #6c757d;
+    font-size: 0.9em;
+    display: block;
+}
+
+.item-resumo p {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.total-compra p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--cor-hover);
+}
+
+.grupo-formulario-duplo {
+    display: flex;
+    gap: 20px;
+}
