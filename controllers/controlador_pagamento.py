@@ -83,4 +83,6 @@ class ControladorPagamento(ControladorBase):
         )
       self.pagamento_model.add(pagamento)
 
-      return f"Pagamento de R$ {pagamento.valor} efetuado com sucesso para as reservas!"
+      return self.renderizar('pagamento_sucesso', valor=pagamento.valor,quantidade=len(reservas_criadas),
+                             titulo="Pagamento Efetuado")
+

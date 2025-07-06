@@ -5,7 +5,7 @@
         "Data de partida": "2025-08-15T08:30:00",
         "Data de chegada": "2025-08-15T10:00:00",
         "Número de assentos": 150,
-        "Assentos disponíveis": 149,
+        "Assentos disponíveis": 144,
         "Assentos ocupados": [
             "A11",
             "B7",
@@ -28,8 +28,14 @@
         "Data de partida": "2025-08-15T10:00:00",
         "Data de chegada": "2025-08-15T12:30:00",
         "Número de assentos": 120,
-        "Assentos disponíveis": 120,
-        "Assentos ocupados": [],
+        "Assentos disponíveis": 115,
+        "Assentos ocupados": [
+            "A1",
+            "B1",
+            "C1",
+            "A2",
+            "A25"
+        ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
             "Cidade": "Fernando de Noronha",
