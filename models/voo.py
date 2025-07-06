@@ -89,11 +89,30 @@ class VooModel:
         with open(self.FILE_PATH, 'w', encoding='utf-8') as f:
             json.dump([v.to_dict() for v in self.voos], f, ensure_ascii=False, indent=4)
 
+    def reload(self):
+        """Recarrega os voos a partir do arquivo JSON no disco."""
+        self.voos = self._load()
+
     def get_all(self):
-        return self.voos
+      """
+      Retorna todos os voos, atualizando o número de assentos disponíveis
+      com base nos assentos ocupados.
+      """
+      for voo in self.voos:
+         voo.assentos_disp = voo.assentos_total - len(voo.assentos_ocupados)
+      return self.voos
+
 
     def get_by_numero_voo(self, numero_voo):
-        return next((v for v in self.voos if v.numero_voo == numero_voo), None)
+      """
+      Retorna o voo correspondente ao número especificado,
+      atualizando também o número de assentos disponíveis.
+      """
+      voo = next((v for v in self.voos if v.numero_voo == numero_voo), None)
+      if voo:
+         voo.assentos_disp = voo.assentos_total - len(voo.assentos_ocupados)
+      return voo
+
 
     def add(self, voo: Voo):
         self.voos.append(voo)

@@ -26,6 +26,7 @@ class ControladorVoo(ControladorBase):
 
     def listar_voos(self, template='lista_voos'):
         """Busca todos os voos no VooModel e os exibe."""
+        self.voo_model.reload()  #  Recarrega dados atualizados do disco
         # Chama o model para pegar a lista de OBJETOS de voo
         todos_os_voos = self.voo_model.get_all()
         # Renderiza o template, passando a lista de objetos

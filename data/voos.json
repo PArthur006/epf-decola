@@ -7,7 +7,12 @@
         "Número de assentos": 150,
         "Assentos disponíveis": 149,
         "Assentos ocupados": [
-            "A11"
+            "A11",
+            "B7",
+            "A13",
+            "B18",
+            "B13",
+            "F1"
         ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
