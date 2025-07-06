@@ -1,29 +1,56 @@
 [
     {
-        "ID": "RDB101U001C1",
-        "UserID": "U001",
-        "NumeroVoo": "DB101",
-        "Assento": "C1",
+        "ID": "RDB202U002D1",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "D1",
         "Status": "Confirmada",
-        "DataReserva": "2025-07-05T22:25:32.271022",
+        "DataReserva": "2025-07-06T20:07:31.738809",
         "PagamentoID": null
     },
     {
-        "ID": "RDB101U001C2",
-        "UserID": "U001",
-        "NumeroVoo": "DB101",
-        "Assento": "C2",
+        "ID": "RDB202U002E1",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "E1",
         "Status": "Confirmada",
-        "DataReserva": "2025-07-05T22:25:32.271437",
+        "DataReserva": "2025-07-06T20:07:31.739039",
         "PagamentoID": null
     },
     {
-        "ID": "RDB101U001C3",
-        "UserID": "U001",
-        "NumeroVoo": "DB101",
-        "Assento": "C3",
+        "ID": "RDB202U002F1",
+        "UserID": "U002",
+        "NumeroVoo": "DB202",
+        "Assento": "F1",
         "Status": "Confirmada",
-        "DataReserva": "2025-07-05T22:25:32.271804",
+        "DataReserva": "2025-07-06T20:07:31.739222",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB303U001A1",
+        "UserID": "U001",
+        "NumeroVoo": "DB303",
+        "Assento": "A1",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T20:12:37.153363",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB303U001A2",
+        "UserID": "U001",
+        "NumeroVoo": "DB303",
+        "Assento": "A2",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T20:12:37.153677",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB303U001A3",
+        "UserID": "U001",
+        "NumeroVoo": "DB303",
+        "Assento": "A3",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-06T20:12:37.154432",
         "PagamentoID": null
     }
 ]

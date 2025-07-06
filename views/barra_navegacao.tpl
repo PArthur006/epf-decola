@@ -2,8 +2,11 @@
     <div class="container-barra-navegacao">
         <a href="/" class="logo-barra-navegacao">Decola-BR</a>
         <ul class="menu-nav">
-            
+
             % if usuario_logado:
+                <li class="item-nav">
+                    <a href="/voos" class="link-nav">Visualizar Voos</a>
+                </li>
                 <li class="item-nav">
                     <a href="/minha-conta" class="link-nav">Minha Conta</a>
                 </li>

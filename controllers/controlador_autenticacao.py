@@ -29,7 +29,7 @@ class ControladorAutenticacao(ControladorBase):
         usuario_encontrado = self.user_model.get_by_email(email)
 
         if usuario_encontrado and usuario_encontrado.password == senha:
-            response.set_cookie("id_usuario", usuario_encontrado.id, secret='sua-chave-secreta-aqui', path='/')
+            response.set_cookie("user_id", usuario_encontrado.id, secret='sua-chave-secreta-aqui', path='/')
             return self.redirecionar('/voos')
         else:
             return self.pagina_login(erro='Email ou senha inválidos.')
@@ -55,5 +55,16 @@ class ControladorAutenticacao(ControladorBase):
         return self.redirecionar('/login')
 
     def efetuar_logout(self):
-        response.delete_cookie("id_usuario", path='/')
+        """
+        Remove o cookie de sessão de forma mais robusta para garantir o logout.
+        """
+        # --- CORREÇÃO AQUI ---
+        # Técnica mais garantida: define o cookie com um valor vazio e
+        # uma data de expiração no passado (expires=0), forçando o navegador a deletá-lo.
+        response.set_cookie("user_id", "", expires=0, path='/')
+        
+        # A linha abaixo é uma segurança extra, mas a principal é a de cima.
+        response.delete_cookie("user_id", path='/')
+        
+        # Redireciona o usuário para a página de login.
         return self.redirecionar('/login')

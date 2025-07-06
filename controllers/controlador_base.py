@@ -24,7 +24,7 @@ class ControladorBase:
         Método auxiliar que verifica o status de login e o passa para todos os templates.
         """
         # Verifica se o usuário está logado através do cookie
-        id_usuario_logado = request.get_cookie("id_usuario", secret='sua-chave-secreta-aqui')
+        id_usuario_logado = request.get_cookie("user_id", secret='sua-chave-secreta-aqui')
         contexto['usuario_logado'] = id_usuario_logado is not None
         
         return template(nome_template, **contexto)
@@ -35,4 +35,4 @@ class ControladorBase:
 
     def obter_usuario_logado(self):
         """Verifica o cookie e retorna o ID do usuário logado, se houver."""
-        return request.get_cookie("id_usuario", secret='sua-chave-secreta-aqui')
+        return request.get_cookie("user_id", secret='sua-chave-secreta-aqui')

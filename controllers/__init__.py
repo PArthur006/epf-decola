@@ -29,7 +29,7 @@ def init_controllers(app):
     controlador_voo = ControladorVoo(app, voo_model)
     # Passa todos os models que o controlador de pagamento precisa
     controlador_pagamento = ControladorPagamento(app, user_model, voo_model, reserva_model, pagamento_model)
-    # A inicialização do controlador de usuário pode ser ativada quando necessário
-    # controlador_usuario = ControladorUsuario(app, user_model)
-    
+    # A inicialização do controlador de usuário
+    controlador_usuario = ControladorUsuario(app, reserva_model)
+
     print("✅ Controllers inicializados.")
