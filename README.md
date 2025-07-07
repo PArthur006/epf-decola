@@ -23,6 +23,8 @@ O projeto conta com um fluxo de usuário completo, incluindo:
 * **Persistência de Dados:** JSON
 * **Controle de Versão:** Git e GitHub
 
+![Diagrama da Arquitetura do Projeto](./docs/diagrama-projeto.jpeg)
+
 ## 🏛️ Arquitetura
 
 O sistema foi desenvolvido seguindo o padrão **Model-View-Controller (MVC)**, com uma camada de **Serviço** para separar as responsabilidades:
