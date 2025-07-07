@@ -1,15 +1,30 @@
 /* ==========================================================================
-   1. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS
+   1. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS DE COR
    ========================================================================== */
+
 :root {
-  --cor-primaria: #3498db;
+  /* Paleta de Cores Principal */
+  --cor-principal: #007bff;
+  --cor-principal-escura: #0056b3;
   --cor-secundaria: #2980b9;
-  --cor-perigo: #e74c3c;
+
+  /* Cores de Feedback */
   --cor-sucesso: #2ecc71;
+  --cor-perigo: #e74c3c;
+  --cor-aviso: #f39c12;
+  
+  /* Cores Neutras e de UI */
   --cor-texto: #333;
-  --cinza-claro: #f5f5f5;
-  --cor-borda: #ddd;
-  --cor-hover: #007bff;
+  --cor-fundo: #f4f7f6;
+  --cor-fundo-claro: #f8f9fa;
+  --branco: #fff;
+  --cinza-borda: #ddd;
+  --cinza-detalhe: #6c757d;
+  --cinza-mapa-disponivel: #ced4da;
+  --cinza-mapa-fundo: #e9ecef;
+  --cinza-mapa-borda: #adb5bd;
+  
+  /* Outros */
   --sombra-padrao: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -22,27 +37,29 @@
 body {
   font-family: sans-serif;
   color: var(--cor-texto);
-  background-color: #f4f7f6;
+  background-color: var(--cor-fundo);
 }
 
+/* Container genérico para limitar a largura do conteúdo */
 .container {
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
-  background: white;
+  background: var(--branco);
   border-radius: 8px;
   box-shadow: var(--sombra-padrao);
 }
 
 
-/* ============================
-   2. COMPONENTES REUTILIZÁVEIS
-   ============================*/
+/* ==========================================================================
+   2. COMPONENTES REUTILIZÁVEIS (Botões e Cards)
+   ========================================================================== */
+
 .btn-largura-total {
   width: 100%;
   padding: 12px;
-  background-color: var(--cor-hover);
-  color: white;
+  background-color: var(--cor-principal);
+  color: var(--branco);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -51,17 +68,48 @@ body {
 }
 
 .btn-largura-total:hover {
-  background-color: #0056b3;
+  background-color: var(--cor-principal-escura);
+}
+
+.cartao {
+  background: var(--branco);
+  border-radius: 8px;
+  box-shadow: var(--sombra-padrao);
+  overflow: hidden;
+  min-width: 300px;
+  text-align: left;
+  scroll-snap-align: start;
+}
+
+.cartao img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.conteudo-cartao {
+  padding: 15px;
+}
+
+.conteudo-cartao h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.conteudo-cartao p {
+  margin: 0;
+  color: var(--cor-principal);
+  font-weight: bold;
 }
 
 
-/* =============================================
+/* ==========================================================================
    3. LAYOUT PRINCIPAL E COMPONENTES ESPECÍFICOS
-   ============================================= */
+   ========================================================================== */
 
 /* --- Barra de Navegação --- */
 .barra-navegacao {
-  background-color: #fff;
+  background-color: var(--branco);
   height: 80px;
   display: flex;
   justify-content: center;
@@ -83,7 +131,7 @@ body {
 }
 
 .logo-barra-navegacao {
-  color: #0056b3;
+  color: var(--cor-principal-escura);
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: bold;
@@ -103,20 +151,20 @@ body {
 }
 
 .link-nav:hover {
-  color: var(--cor-hover)
+  color: var(--cor-principal);
 }
 
 .btn-cadastro {
   padding: 8px 20px;
   border-radius: 4px;
-  background-color: var(--cor-hover);
-  color: #fff;
+  background-color: var(--cor-principal);
+  color: var(--branco);
   border: none;
 }
 
 .btn-cadastro:hover {
-  background-color: #0056b3;
-  color: #fff;
+  background-color: var(--cor-principal-escura);
+  color: var(--branco);
 }
 
 /* --- Formulários (Login/Cadastro) --- */
@@ -131,7 +179,7 @@ body {
 .caixa-formulario {
   width: 100%;
   max-width: 400px;
-  background: #fff;
+  background: var(--branco);
   padding: 40px;
   border-radius: 8px;
   box-shadow: var(--sombra-padrao);
@@ -157,7 +205,7 @@ body {
 .grupo-formulario input {
   width: 100%;
   padding: 10px;
-  border: 1px solid var(--cor-borda);
+  border: 1px solid var(--cinza-borda);
   border-radius: 4px;
 }
 
@@ -167,7 +215,7 @@ body {
 }
 
 .rodape-formulario a {
-  color: var(--cor-hover);
+  color: var(--cor-principal);
   text-decoration: none;
   font-weight: bold;
 }
@@ -186,9 +234,9 @@ body {
 }
 
 
-/* =================================
+/* ==========================================================================
    4. ESTILOS DE PÁGINAS ESPECÍFICAS
-   =================================*/
+   ========================================================================== */
 
 /* --- Página Inicial (Hero e Carrossel) --- */
 .secao-hero {
@@ -239,7 +287,7 @@ body {
   position: absolute;
   top: 60%;
   transform: translateY(-50%);
-  background-color: #fff;
+  background-color: var(--branco);
   color: var(--cor-texto);
   border: none;
   border-radius: 50%;
@@ -266,37 +314,6 @@ body {
   right: 40px;
 }
 
-.cartao {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: var(--sombra-padrao);
-  overflow: hidden;
-  min-width: 300px;
-  text-align: left;
-  scroll-snap-align: start;
-}
-
-.cartao img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.conteudo-cartao {
-  padding: 15px;
-}
-
-.conteudo-cartao h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.conteudo-cartao p {
-  margin: 0;
-  color: var(--cor-hover);
-  font-weight: bold;
-}
-
 /* --- Página de Lista de Voos --- */
 .grade-voos {
   display: grid;
@@ -306,7 +323,7 @@ body {
 }
 
 .cartao-voo-interativo {
-  background: #fff;
+  background: var(--branco);
   border-radius: 8px;
   box-shadow: var(--sombra-padrao);
   overflow: hidden;
@@ -331,7 +348,7 @@ body {
 
 .cartao-voo-interativo .info-basica p {
   margin: 5px 0 0;
-  color: var(--cor-hover);
+  color: var(--cor-principal);
   font-weight: bold;
   font-size: 1.1rem;
 }
@@ -376,7 +393,6 @@ body {
   margin: 0;
 }
 
-
 /* --- Página de Mapa de Assentos --- */
 .container-aviao {
     padding: 20px;
@@ -386,20 +402,28 @@ body {
 }
 
 .aviao {
-    background: #e9ecef;
-    border: 3px solid #adb5bd;
+    background: var(--cinza-mapa-fundo);
+    border: 3px solid var(--cinza-mapa-borda);
     border-radius: 20px 20px 5px 5px;
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 80px;
+    margin-bottom: 80px; /* Espaço para o rodapé fixo não cobrir o conteúdo */
 }
 
 .secao-aviao {
     font-weight: bold;
     color: #888;
     margin: 15px 0;
+}
+
+.bico-aviao {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 60px solid #888;
 }
 
 .asas-aviao {
@@ -410,8 +434,7 @@ body {
     padding: 5px;
 }
 
-
-.mapa-assentos { /* O layout será 3 assentos, corredor, 3 assentos */
+.mapa-assentos {
     display: grid;
     grid-template-columns: repeat(7, 1fr); 
     gap: 10px;
@@ -436,27 +459,27 @@ body {
 }
 
 .assento.disponivel {
-    background-color: #ced4da;
+    background-color: var(--cinza-mapa-disponivel);
 }
 
 .assento.disponivel:hover {
-    border-color: var(--cor-hover);
+    border-color: var(--cor-principal);
 }
 
 .assento.ocupado {
     background-color: var(--cor-perigo); 
-    color: white;
+    color: var(--branco);
     cursor: not-allowed;
 }
 
 .assento.selecionado {
     background-color: var(--cor-sucesso); 
-    color: white;
+    color: var(--branco);
     border-color: #28a745;
 }
 
 .corredor {
-    color: #adb5bd;
+    color: var(--cinza-mapa-borda);
 }
 
 .marcador-saida {
@@ -464,11 +487,11 @@ body {
     text-align: center;
     margin: 10px 0;
     padding: 5px;
-    background: #f8f9fa;
-    color: #6c757d;
+    background: var(--cor-fundo-claro);
+    color: var(--cinza-detalhe);
     font-weight: bold;
-    border-top: 1px dashed #6c757d;
-    border-bottom: 1px dashed #6c757d;
+    border-top: 1px dashed var(--cinza-detalhe);
+    border-bottom: 1px dashed var(--cinza-detalhe);
 }
 
 .resumo-reserva {
@@ -476,7 +499,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #fff;
+    background: var(--branco);
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     padding: 15px 30px;
     display: flex;
@@ -494,7 +517,6 @@ body {
     padding: 10px 30px;
 }
 
-
 /* --- Página de Pagamento --- */
 .layout-pagamento {
     display: grid;
@@ -504,7 +526,7 @@ body {
 }
 
 .resumo-compra {
-    background-color: #f8f9fa;
+    background-color: var(--cor-fundo-claro);
     padding: 30px;
     border-radius: 8px;
 }
@@ -521,7 +543,7 @@ body {
 }
 
 .item-resumo span {
-    color: #6c757d;
+    color: var(--cinza-detalhe);
     font-size: 0.9em;
     display: block;
 }
@@ -535,7 +557,7 @@ body {
 .total-compra p {
     font-size: 1.5em;
     font-weight: bold;
-    color: var(--cor-hover);
+    color: var(--cor-principal);
 }
 
 .grupo-formulario-duplo {
@@ -545,7 +567,7 @@ body {
 
 /* --- Página Minha Conta --- */
 .caixa-perfil {
-    background-color: #f8f9fa;
+    background-color: var(--cor-fundo-claro);
     padding: 25px;
     border-radius: 8px;
     margin-bottom: 40px;
@@ -553,7 +575,7 @@ body {
 
 .caixa-perfil h3 {
     margin-top: 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--cinza-borda);
     padding-bottom: 15px;
 }
 
@@ -565,7 +587,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background: var(--branco);
     padding: 20px;
     border-radius: 8px;
     box-shadow: var(--sombra-padrao);
@@ -586,17 +608,17 @@ body {
 
 .info-assento-reserva span, .info-status-reserva span {
     font-size: 0.8em;
-    color: #6c757d;
+    color: var(--cinza-detalhe);
 }
 
 .info-status-reserva p {
     font-weight: bold;
     padding: 5px 10px;
     border-radius: 15px;
-    color: #fff;
+    color: var(--branco);
 }
 
-/* Cores dinâmicas para o status */
-.status-confirmada { background-color: #2ecc71; }
-.status-pendente { background-color: #f39c12; }
-.status-cancelada { background-color: #e74c3c; }
+/* Cores dinâmicas para o status da reserva */
+.status-confirmada { background-color: var(--cor-sucesso); }
+.status-pendente { background-color: var(--cor-aviso); }
+.status-cancelada { background-color: var(--cor-perigo); }

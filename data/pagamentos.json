@@ -46,5 +46,13 @@
         "FormaPagamento": "Cartão de Crédito",
         "Status": "Pendente",
         "DataPagamento": "2025-07-06T21:18:18.415950"
+    },
+    {
+        "ID": "PG0007",
+        "ReservaID": "RDB101U006B2",
+        "Valor": 960.0,
+        "FormaPagamento": "Cartão de Crédito",
+        "Status": "Pendente",
+        "DataPagamento": "2025-07-07T01:05:51.905403"
     }
 ]

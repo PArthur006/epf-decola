@@ -56,6 +56,31 @@
         "cpf": "000.000.000-00",
         "nationality": "N/A",
         "phone": null,
+        "reservas": [
+            "RDB404U004C2",
+            "RDB404U004C3"
+        ]
+    },
+    {
+        "id": "U005",
+        "name": "Julia Rodrigues",
+        "email": "Julia@gmail.com",
+        "password": "1234",
+        "birthdate": "N/A",
+        "cpf": "000.000.000-00",
+        "nationality": "N/A",
+        "phone": null,
+        "reservas": []
+    },
+    {
+        "id": "U006",
+        "name": "UserM",
+        "email": "M@gmail.com",
+        "password": "1234",
+        "birthdate": "N/A",
+        "cpf": "000.000.000-00",
+        "nationality": "N/A",
+        "phone": null,
         "reservas": []
     }
 ]

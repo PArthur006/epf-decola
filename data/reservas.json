@@ -124,5 +124,23 @@
         "Status": "Confirmada",
         "DataReserva": "2025-07-06T21:18:18.410805",
         "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U006B2",
+        "UserID": "U006",
+        "NumeroVoo": "DB101",
+        "Assento": "B2",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-07T01:05:51.868194",
+        "PagamentoID": null
+    },
+    {
+        "ID": "RDB101U006C2",
+        "UserID": "U006",
+        "NumeroVoo": "DB101",
+        "Assento": "C2",
+        "Status": "Confirmada",
+        "DataReserva": "2025-07-07T01:05:51.868926",
+        "PagamentoID": null
     }
 ]

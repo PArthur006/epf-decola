@@ -3,20 +3,22 @@ import json
 import os
 
 class Destino:
-    # 1. Adicionamos 'imagem' ao construtor
+    """Representa a entidade de um Destino, com informações sobre
+    a cidade, país, aeroporto e uma imagem representativa."""    
     def __init__(self, cidade, pais, aeroporto, imagem):
+        """Construtor da classe Destino"""
         self.cidade = cidade
         self.pais = pais
         self.aeroporto = aeroporto
-        self.imagem = imagem # Atributo novo
+        self.imagem = imagem 
 
     def __repr__(self):
-        # ... (pode manter como está) ...
+        """Retorna uma representação textual do objeto."""
         return f"Destino(cidade='{self.cidade}', pais='{self.pais}', imagem='{self.imagem}')"
 
 
     def to_dict(self):
-        # 2. Adicionamos 'Imagem' ao dicionário
+        """Converte o objeto Destino para um dicionário, para ser salvo em JSON."""
         return {
             'Cidade': self.cidade,
             'País': self.pais,
@@ -26,7 +28,7 @@ class Destino:
 
     @classmethod
     def from_dict(cls, data):
-        # 3. Lemos a 'Imagem' do dicionário
+        """Cria uma instância de Destino a partir de um dicionário."""
         return cls(
             cidade=data['Cidade'],
             pais=data['País'],

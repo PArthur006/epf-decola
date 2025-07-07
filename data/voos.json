@@ -5,7 +5,7 @@
         "Data de partida": "2025-08-15T08:30:00",
         "Data de chegada": "2025-08-15T10:00:00",
         "Número de assentos": 150,
-        "Assentos disponíveis": 136,
+        "Assentos disponíveis": 134,
         "Assentos ocupados": [
             "A11",
             "B7",
@@ -20,7 +20,9 @@
             "A3",
             "D1",
             "D2",
-            "D3"
+            "D3",
+            "B2",
+            "C2"
         ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {

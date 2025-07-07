@@ -4,21 +4,23 @@ from models.user import UserModel
 from models.reserva import ReservaModel
 
 class ControladorUsuario(ControladorBase):
-    # 1. O __init__ agora recebe os models como argumentos
+    """Controller para gerenciar a área do usuário logado ("Minha Conta")
+    e as rotas administrativas de CRUD de usuário."""
     def __init__(self, app, user_model: UserModel, reserva_model: ReservaModel):
+        """Recebe as instâncias compartilhadas dos models de usuários e reserva."""
         super().__init__(app)
-        # 2. Armazena as instâncias compartilhadas
         self.user_model = user_model
         self.reserva_model = reserva_model
         self.configurar_rotas()
 
     def configurar_rotas(self):
-        """Define as rotas de CRUD de usuário."""
+        """Mapeia as URLs de usuário para os métodos correspondentes."""
         self.app.route('/usuarios', method='GET', callback=self.listar_usuarios)
         self.app.route('/usuarios/adicionar', method=['GET', 'POST'], callback=self.adicionar_usuario)
         self.app.route('/usuarios/editar/<user_id>', method=['GET', 'POST'], callback=self.editar_usuario)
         self.app.route('/usuarios/deletar/<user_id>', method='POST', callback=self.deletar_usuario)
-        self.app.route('/minha-conta', method='GET', callback=self.pagina_minha_conta) #rota para a página da conta do usuário logado
+        # Rota para a página da conta do usuário logado
+        self.app.route('/minha-conta', method='GET', callback=self.pagina_minha_conta)
 
     def listar_usuarios(self):
         usuarios = self.user_model.get_all()
@@ -58,30 +60,27 @@ class ControladorUsuario(ControladorBase):
         self.redirecionar('/usuarios')
 
     def pagina_minha_conta(self):
-        """Exibe a página de perfil do usuário com seus dados e reservas."""
-        # 1. Espião para ver o que está no cookie
+        """Exibe a página de perfil do usuário com seus dados e histórico de reservas."""
+        # Obtém o ID do usuário a partir do cookie de sessão.
         id_usuario_logado = self.obter_usuario_logado()
-        print(f"DEBUG MINHA CONTA: Tentando carregar página. Cookie 'user_id' encontrado: '{id_usuario_logado}'")
 
+        # Se não houver usuário logado, redireciona para a tela de login.
         if not id_usuario_logado:
-            print("DEBUG MINHA CONTA: Cookie não encontrado. Redirecionando para /login.")
             return self.redirecionar('/login')
 
-        # 2. Espião para ver todos os IDs que o UserModel conhece AGORA
+        # Busca o objeto completo do usuário usando o ID.
         lista_ids_no_modelo = [u.id for u in self.user_model.get_all()]
-        print(f"DEBUG MINHA CONTA: IDs de usuário que o modelo conhece: {lista_ids_no_modelo}")
 
-        # 3. Tentativa de buscar o usuário
+        # Busca o objeto completo do usuário usando o ID
         usuario = self.user_model.get_by_id(id_usuario_logado)
         
+        # Caso o cookie exista ma so usuário tenha sido deletado.
         if not usuario:
-            # 4. Espião para nos dizer se a busca falhou
-            print(f"DEBUG MINHA CONTA: ERRO! Usuário com ID '{id_usuario_logado}' não encontrado na lista acima. Deslogando.")
             return self.redirecionar('/logout')
 
-        # Se chegou até aqui, a busca foi um sucesso.
-        print(f"DEBUG MINHA CONTA: Sucesso! Usuário '{usuario.name}' encontrado. Carregando página.")
+        # Busca todas as reservas e filtra apenas as que pertencem a este usuário.
         todas_as_reservas = self.reserva_model.get_all()
         reservas_do_usuario = [r for r in todas_as_reservas if r.user and r.user.id == id_usuario_logado]
-        
+
+        # Renderiza o template, passando os dados do usuário e sua lista de reservas.
         return self.renderizar('minha_conta', usuario=usuario, reservas=reservas_do_usuario, titulo="Minha Conta")
