@@ -23,7 +23,7 @@ class Voo:
         self.destino = destino
 
     def __repr__(self):
-        """Retorna uma represnetação textual do objeto, para depuração."""
+        """Retorna uma representação textual do objeto, para depuração."""
         return (f"Voo(numero_voo={self.numero_voo}, preco={self.preco}, "
                 f"data_partida={self.data_partida}, data_chegada={self.data_chegada}, "
                 f"assentos_total={self.assentos_total}, assentos_disp={self.assentos_disp}, "
@@ -40,7 +40,7 @@ class Voo:
             'Assentos disponíveis': self.assentos_disp,
             'Assentos ocupados': self.assentos_ocupados,
             'Companhia Aérea': self.comp_aerea,
-            # Converte também o objeto Destino aninhado para um dicionário.
+            # Converte também o objeto Destino alinhado para um dicionário.
             'Destino': self.destino.to_dict()
         }
 
