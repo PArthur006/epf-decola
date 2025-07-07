@@ -418,14 +418,6 @@ body {
     margin: 15px 0;
 }
 
-.bico-aviao {
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 60px solid #888;
-}
-
 .asas-aviao {
     grid-column: 1 / -1;
     text-align: center;

@@ -5,7 +5,7 @@
         "Data de partida": "2025-08-15T08:30:00",
         "Data de chegada": "2025-08-15T10:00:00",
         "Número de assentos": 150,
-        "Assentos disponíveis": 134,
+        "Assentos disponíveis": 132,
         "Assentos ocupados": [
             "A11",
             "B7",
@@ -22,7 +22,9 @@
             "D2",
             "D3",
             "B2",
-            "C2"
+            "C2",
+            "D15",
+            "E15"
         ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
@@ -62,8 +64,11 @@
         "Data de partida": "2025-08-16T14:00:00",
         "Data de chegada": "2025-08-16T15:30:00",
         "Número de assentos": 150,
-        "Assentos disponíveis": 150,
-        "Assentos ocupados": [],
+        "Assentos disponíveis": 148,
+        "Assentos ocupados": [
+            "A1",
+            "B1"
+        ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
             "Cidade": "Gramado",
@@ -78,14 +83,16 @@
         "Data de partida": "2025-08-16T16:00:00",
         "Data de chegada": "2025-08-16T18:30:00",
         "Número de assentos": 130,
-        "Assentos disponíveis": 124,
+        "Assentos disponíveis": 122,
         "Assentos ocupados": [
             "D1",
             "E1",
             "B1",
             "C1",
             "C2",
-            "C3"
+            "C3",
+            "A5",
+            "B5"
         ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {

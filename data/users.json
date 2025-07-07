@@ -1,81 +1,22 @@
 [
     {
         "id": "U001",
-        "name": "User A",
-        "email": "A@gmail.com",
+        "name": "Pedro Arthur",
+        "email": "pedro@gmail.com",
         "password": "1234",
         "birthdate": "N/A",
         "cpf": "000.000.000-00",
         "nationality": "N/A",
         "phone": null,
         "reservas": [
-            "RDB101U001A1",
-            "RDB101U001B1",
-            "RDB101U001C1",
-            "RDB404U001D1",
-            "RDB404U001E1"
+            "RDB101U001D15",
+            "RDB101U001E15"
         ]
     },
     {
         "id": "U002",
-        "name": "UserB",
-        "email": "B@gmail.com",
-        "password": "1234",
-        "birthdate": "N/A",
-        "cpf": "000.000.000-00",
-        "nationality": "N/A",
-        "phone": null,
-        "reservas": [
-            "RDB101U002A2",
-            "RDB101U002A3",
-            "RDB404U002B1",
-            "RDB404U002C1"
-        ]
-    },
-    {
-        "id": "U003",
-        "name": "UserC",
-        "email": "C@gmail.com",
-        "password": "1234",
-        "birthdate": "N/A",
-        "cpf": "000.000.000-00",
-        "nationality": "N/A",
-        "phone": null,
-        "reservas": [
-            "RDB101U003D1",
-            "RDB101U003D2",
-            "RDB101U003D3"
-        ]
-    },
-    {
-        "id": "U004",
-        "name": "UserD",
-        "email": "D@gmail.com",
-        "password": "1234",
-        "birthdate": "N/A",
-        "cpf": "000.000.000-00",
-        "nationality": "N/A",
-        "phone": null,
-        "reservas": [
-            "RDB404U004C2",
-            "RDB404U004C3"
-        ]
-    },
-    {
-        "id": "U005",
-        "name": "Julia Rodrigues",
-        "email": "Julia@gmail.com",
-        "password": "1234",
-        "birthdate": "N/A",
-        "cpf": "000.000.000-00",
-        "nationality": "N/A",
-        "phone": null,
-        "reservas": []
-    },
-    {
-        "id": "U006",
-        "name": "UserM",
-        "email": "M@gmail.com",
+        "name": "Maria Luana",
+        "email": "maria@gmail.com",
         "password": "1234",
         "birthdate": "N/A",
         "cpf": "000.000.000-00",
