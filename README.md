@@ -1,105 +1,82 @@
-# Projeto Template: POO com Python + Bottle + JSON
+# ✈️ Decola-Brasil: Sistema de Gestão de Reservas Aéreas
 
-Este é um projeto de template educacional voltado para o ensino de **Programação Orientada a Objetos (POO)** do Prof. Lucas Boaventura, Universidade de Brasília (UnB).
+![Python](https://img.shields.io/badge/Python-3.10-blue.svg) ![Framework](https://img.shields.io/badge/Framework-Bottle-green.svg)
 
-Utiliza o microframework **Bottle**. Ideal para uso em disciplinas introdutórias de Engenharia de Software ou Ciência da Computação.
+Este projeto é uma aplicação web completa para gestão de reservas aéreas, desenvolvida como trabalho final para a disciplina de **Orientação a Objetos**. O sistema simula um portal de companhia aérea, permitindo que usuários se cadastrem, busquem voos, visualizem um mapa interativo de assentos, e realizem uma reserva completa, com todos os dados persistidos em arquivos JSON.
 
-## 💡 Objetivo
+## ✨ Funcionalidades Implementadas
 
-Fornecer uma base simples, extensível e didática para construção de aplicações web orientadas a objetos com aplicações WEB em Python, ideal para trabalhos finais ou exercícios práticos.
+O projeto conta com um fluxo de usuário completo, incluindo:
 
----
+* **Autenticação de Usuários:** Sistema de cadastro, login e logout com gerenciamento de sessão via cookies.
+* **Página Inicial Dinâmica:** Apresenta um carrossel interativo com os principais destinos.
+* **Listagem de Voos:** Exibe os voos disponíveis em cards interativos que se expandem ao clicar para mostrar mais detalhes.
+* **Mapa de Assentos Interativo:** Representação visual de uma aeronave, com indicadores de bico, asas e cauda. Permite a seleção de assentos disponíveis, com feedback de cores em tempo real e atualização do resumo da seleção.
+* **Fluxo de Reserva e Pagamento:** Conduz o usuário desde a seleção de assentos até uma página de confirmação e checkout.
+* **Perfil de Usuário:** Uma área logada onde o usuário pode visualizar seus dados pessoais e seu histórico de reservas.
 
-## 🗂 Estrutura de Pastas
+## 🚀 Tecnologias Utilizadas
 
-```bash
-poo-python-bottle-template/
-├── app.py # Ponto de entrada do sistema
-├── config.py # Configurações e caminhos do projeto
-├── main.py # Inicialização da aplicação
-├── requirements.txt # Dependências do projeto
-├── README.md # Este arquivo
-├── controllers/ # Controladores e rotas
-├── models/ # Definição das entidades (ex: User)
-├── services/ # Lógica de persistência (JSON)
-├── views/ # Arquivos HTML (Bottle Templating)
-├── static/ # CSS, JS e imagens
-├── data/ # Arquivos JSON de dados
-└── .vscode/ # Configurações opcionais do VS Code
-```
+* **Back-end:** Python 3
+* **Microframework Web:** Bottle
+* **Front-end:** HTML5, CSS3 (com Flexbox e Grid), JavaScript
+* **Persistência de Dados:** JSON
+* **Controle de Versão:** Git e GitHub
 
+## 🏛️ Arquitetura
 
----
+O sistema foi desenvolvido seguindo o padrão **Model-View-Controller (MVC)**, com uma camada de **Serviço** para separar as responsabilidades:
 
-## 📁 Descrição das Pastas
+* **Models:** Classes que representam as entidades do negócio (`Voo`, `User`, `Reserva`, etc.) e a lógica de acesso aos dados JSON.
+* **Views:** Templates (`.tpl`) responsáveis pela apresentação dos dados ao usuário.
+* **Controllers:** Classes que fazem a ponte entre os `Models` e as `Views`, controlando o fluxo da aplicação.
 
-### `controllers/`
-Contém as classes responsáveis por lidar com as rotas da aplicação. Exemplos:
-- `user_controller.py`: rotas para listagem, adição, edição e remoção de usuários.
-- `base_controller.py`: classe base com utilitários comuns.
+## ⚙️ Como Executar o Projeto
 
-### `models/`
-Define as classes que representam os dados da aplicação. Exemplo:
-- `user.py`: classe `User`, com atributos como `id`, `name`, `email`, etc.
+Siga os passos abaixo para rodar o projeto em seu ambiente local.
 
-### `services/`
-Responsável por salvar, carregar e manipular dados usando arquivos JSON. Exemplo:
-- `user_service.py`: contém métodos como `get_all`, `add_user`, `delete_user`.
+### Pré-requisitos
 
-### `views/`
-Contém os arquivos `.tpl` utilizados pelo Bottle como páginas HTML:
-- `layout.tpl`: estrutura base com navegação e bloco `content`.
-- `users.tpl`: lista os usuários.
-- `user_form.tpl`: formulário para adicionar/editar usuário.
+* [Python 3.10](https://www.python.org/downloads/) ou superior
+* `pip` (gerenciador de pacotes do Python)
 
-### `static/`
-Arquivos estáticos como:
-- `css/style.css`: estilos básicos.
-- `js/main.js`: scripts JS opcionais.
-- `img/BottleLogo.png`: exemplo de imagem.
+### Instalação e Execução
 
-### `data/`
-Armazena os arquivos `.json` que simulam o banco de dados:
-- `users.json`: onde os dados dos usuários são persistidos.
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/PArthur006/epf-decola.git
+    cd epf-decola
+    ```
 
----
+2.  **(Recomendado) Crie e ative um ambiente virtual:**
+    ```bash
+    # Cria o ambiente
+    python -m venv venv
+    
+    # Ativa o ambiente
+    # No Linux/Mac:
+    source venv/bin/activate
+    # No Windows:
+    # venv\Scripts\activate
+    ```
 
-## ▶️ Como Executar
+3.  **Instale as dependências:**
+    O projeto utiliza a biblioteca Bottle, listada no `requirements.txt`.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-1. Crie o ambiente virtual na pasta fora do seu projeto:
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\\Scripts\\activate     # Windows
-```
+4.  **Execute a aplicação:**
+    ```bash
+    python main.py
+    ```
 
-2. Entre dentro do seu projeto criado a partir do template e instale as dependências:
-```bash
-pip install -r requirements.txt
-```
+5.  Abra seu navegador e acesse: `http://localhost:8080`
 
-3. Rode a aplicação:
-```bash
-python main.py
-```
+## 🧑‍💻 Equipe
 
-4. Accese sua aplicação no navegador em: [http://localhost:8080](http://localhost:8080)
+* **([Pedro Arthur Rodrigues](https://github.com/PArthur006)):** Responsável pelo desenvolvimento Front-end, arquitetura dos Controllers e interatividade das páginas.
+* **([Maria Luana Lopes](https://github.com/MLuana725))** Responsável pelo desenvolvimento Back-end, modelagem de dados e lógica de persistência.
 
 ---
-
-## ✍️ Personalização
-Para adicionar novos modelos (ex: Atividades):
-
-1. Crie a classe no diretório **models/**.
-
-2. Crie o service correspondente para manipulação do JSON.
-
-3. Crie o controller com as rotas.
-
-4. Crie as views .tpl associadas.
-
----
-
-## 🧠 Autor e Licença
-Projeto desenvolvido como template didático para disciplinas de Programação Orientada a Objetos, baseado no [BMVC](https://github.com/hgmachine/bmvc_start_from_this).
-Você pode reutilizar, modificar e compartilhar livremente.
+*Este projeto foi desenvolvido para a disciplina de Orientação a Objetos (2025.1) do Professor Lucas Boaventura, a partir de um template educacional.*
