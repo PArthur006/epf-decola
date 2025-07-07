@@ -1,12 +1,12 @@
-# controllers/controlador_autenticacao.py (VERSÃO FINAL)
-
 from bottle import request, response
 from .controlador_base import ControladorBase
 from models.user import UserModel, User
 
 class ControladorAutenticacao(ControladorBase):
+    # 1. O __init__ agora recebe o user_model como argumento
     def __init__(self, app, user_model: UserModel):
         super().__init__(app)
+        # 2. Ele armazena a instância compartilhada, em vez de criar uma nova
         self.user_model = user_model
         self.configurar_rotas()
 
@@ -29,6 +29,9 @@ class ControladorAutenticacao(ControladorBase):
         usuario_encontrado = self.user_model.get_by_email(email)
 
         if usuario_encontrado and usuario_encontrado.password == senha:
+            print(f"DEBUG LOGIN: Sucesso para o usuário {usuario_encontrado.name}. Salvando cookie com ID: '{usuario_encontrado.id}'")
+
+
             response.set_cookie("user_id", usuario_encontrado.id, secret='sua-chave-secreta-aqui', path='/')
             return self.redirecionar('/voos')
         else:
