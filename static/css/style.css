@@ -542,3 +542,61 @@ body {
     display: flex;
     gap: 20px;
 }
+
+/* --- Página Minha Conta --- */
+.caixa-perfil {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.caixa-perfil h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.historico-reservas h2 {
+    margin-bottom: 20px;
+}
+
+.cartao-reserva {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--sombra-padrao);
+    margin-bottom: 15px;
+}
+
+.info-voo-reserva h4 {
+    margin: 0 0 5px 0;
+}
+
+.info-voo-reserva p, .info-assento-reserva p, .info-status-reserva p {
+    margin: 0;
+}
+
+.info-assento-reserva, .info-status-reserva {
+    text-align: center;
+}
+
+.info-assento-reserva span, .info-status-reserva span {
+    font-size: 0.8em;
+    color: #6c757d;
+}
+
+.info-status-reserva p {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: #fff;
+}
+
+/* Cores dinâmicas para o status */
+.status-confirmada { background-color: #2ecc71; }
+.status-pendente { background-color: #f39c12; }
+.status-cancelada { background-color: #e74c3c; }

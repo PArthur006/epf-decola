@@ -1,12 +1,12 @@
-# controllers/controlador_autenticacao.py (VERSÃO FINAL)
-
 from bottle import request, response
 from .controlador_base import ControladorBase
 from models.user import UserModel, User
 
 class ControladorAutenticacao(ControladorBase):
+    # 1. O __init__ agora recebe o user_model como argumento
     def __init__(self, app, user_model: UserModel):
         super().__init__(app)
+        # 2. Ele armazena a instância compartilhada, em vez de criar uma nova
         self.user_model = user_model
         self.configurar_rotas()
 
@@ -29,7 +29,10 @@ class ControladorAutenticacao(ControladorBase):
         usuario_encontrado = self.user_model.get_by_email(email)
 
         if usuario_encontrado and usuario_encontrado.password == senha:
-            response.set_cookie("id_usuario", usuario_encontrado.id, secret='sua-chave-secreta-aqui', path='/')
+            print(f"DEBUG LOGIN: Sucesso para o usuário {usuario_encontrado.name}. Salvando cookie com ID: '{usuario_encontrado.id}'")
+
+
+            response.set_cookie("user_id", usuario_encontrado.id, secret='sua-chave-secreta-aqui', path='/')
             return self.redirecionar('/voos')
         else:
             return self.pagina_login(erro='Email ou senha inválidos.')
@@ -55,5 +58,16 @@ class ControladorAutenticacao(ControladorBase):
         return self.redirecionar('/login')
 
     def efetuar_logout(self):
-        response.delete_cookie("id_usuario", path='/')
+        """
+        Remove o cookie de sessão de forma mais robusta para garantir o logout.
+        """
+        # --- CORREÇÃO AQUI ---
+        # Técnica mais garantida: define o cookie com um valor vazio e
+        # uma data de expiração no passado (expires=0), forçando o navegador a deletá-lo.
+        response.set_cookie("user_id", "", expires=0, path='/')
+        
+        # A linha abaixo é uma segurança extra, mas a principal é a de cima.
+        response.delete_cookie("user_id", path='/')
+        
+        # Redireciona o usuário para a página de login.
         return self.redirecionar('/login')

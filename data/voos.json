@@ -5,7 +5,23 @@
         "Data de partida": "2025-08-15T08:30:00",
         "Data de chegada": "2025-08-15T10:00:00",
         "Número de assentos": 150,
-        "Assentos disponíveis": 150,
+        "Assentos disponíveis": 136,
+        "Assentos ocupados": [
+            "A11",
+            "B7",
+            "A13",
+            "B18",
+            "B13",
+            "F1",
+            "A1",
+            "B1",
+            "C1",
+            "A2",
+            "A3",
+            "D1",
+            "D2",
+            "D3"
+        ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
             "Cidade": "Rio de Janeiro",
@@ -20,7 +36,16 @@
         "Data de partida": "2025-08-15T10:00:00",
         "Data de chegada": "2025-08-15T12:30:00",
         "Número de assentos": 120,
-        "Assentos disponíveis": 120,
+        "Assentos disponíveis": 113,
+        "Assentos ocupados": [
+            "A1",
+            "B1",
+            "C1",
+            "A2",
+            "A25",
+            "D1",
+            "E1"
+        ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
             "Cidade": "Fernando de Noronha",
@@ -36,6 +61,7 @@
         "Data de chegada": "2025-08-16T15:30:00",
         "Número de assentos": 150,
         "Assentos disponíveis": 150,
+        "Assentos ocupados": [],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
             "Cidade": "Gramado",
@@ -50,7 +76,15 @@
         "Data de partida": "2025-08-16T16:00:00",
         "Data de chegada": "2025-08-16T18:30:00",
         "Número de assentos": 130,
-        "Assentos disponíveis": 130,
+        "Assentos disponíveis": 124,
+        "Assentos ocupados": [
+            "D1",
+            "E1",
+            "B1",
+            "C1",
+            "C2",
+            "C3"
+        ],
         "Companhia Aérea": "Decola-BR",
         "Destino": {
             "Cidade": "Salvador",
