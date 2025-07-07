@@ -12,6 +12,11 @@
     <div class="container-pagina-formulario">
         <div class="caixa-formulario">
             <h2>Acesse sua conta</h2>
+            % if defined('erro') and erro:
+                <div class="alerta-erro">
+                    {{ erro }}
+                </div>
+            % end
             <form action="/login" method="post">
                 <div class="grupo-formulario">
                     <label for="email">Email</label>

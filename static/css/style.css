@@ -1,6 +1,6 @@
-/* ==========================================================================
+/* ===========================================
    1. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS DE COR
-   ========================================================================== */
+   ===========================================*/
 
 :root {
   /* Paleta de Cores Principal */
@@ -51,9 +51,9 @@ body {
 }
 
 
-/* ==========================================================================
+/* =============================================
    2. COMPONENTES REUTILIZÁVEIS (Botões e Cards)
-   ========================================================================== */
+   =============================================*/
 
 .btn-largura-total {
   width: 100%;
@@ -103,9 +103,9 @@ body {
 }
 
 
-/* ==========================================================================
+/* =============================================
    3. LAYOUT PRINCIPAL E COMPONENTES ESPECÍFICOS
-   ========================================================================== */
+   =============================================*/
 
 /* --- Barra de Navegação --- */
 .barra-navegacao {
@@ -234,9 +234,9 @@ body {
 }
 
 
-/* ==========================================================================
+/* =================================
    4. ESTILOS DE PÁGINAS ESPECÍFICAS
-   ========================================================================== */
+   ================================= */
 
 /* --- Página Inicial (Hero e Carrossel) --- */
 .secao-hero {
@@ -409,7 +409,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 80px; /* Espaço para o rodapé fixo não cobrir o conteúdo */
+    margin-bottom: 80px; 
 }
 
 .secao-aviao {
@@ -507,6 +507,18 @@ body {
 .resumo-reserva .btn-largura-total {
     width: auto; 
     padding: 10px 30px;
+}
+
+/* --- Página de Login --- */
+.alerta-erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  font-weight: 500;
+  text-align: center;
 }
 
 /* --- Página de Pagamento --- */
@@ -614,3 +626,25 @@ body {
 .status-confirmada { background-color: var(--cor-sucesso); }
 .status-pendente { background-color: var(--cor-aviso); }
 .status-cancelada { background-color: var(--cor-perigo); }
+
+/*====================
+  5. ANIMAÇÕES GLOBAIS
+  ====================*/
+
+
+/* A animação começa com o elemento transparente e 20px abaixo da sua posição final,
+e termina com o elemento totalmente opaco em sua posição original.*/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container, .container-pagina-formulario, .container-aviao {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
