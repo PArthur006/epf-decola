@@ -40,7 +40,7 @@ class ControladorAutenticacao(ControladorBase):
         usuario_encontrado = self.user_model.get_by_email(email)
 
         # Valida se o usuário existe e se a senha corresponde.
-        if usuario_encontrado and bcrypt.checkpw(senha.encode('utf-8'), usuario_encontrado.password.encode('utf-8')):
+        if usuario_encontrado and bcrypt.checkpw(senha.encode('utf-8'), usuario_encontrado.password):
             # Cria um cookie para manter o usuário logado.
             response.set_cookie("user_id", usuario_encontrado.id, secret=Config.CHAVE_SECRETA, path='/')
             # Redireciona para a página de voos após o login bem-sucedido.
