@@ -1,6 +1,8 @@
 from bottle import request, response
+import bcrypt
 from .controlador_base import ControladorBase
 from models.user import UserModel, User
+from config import Config
 
 class ControladorAutenticacao(ControladorBase):
     """Controller responsável por todas as rotas de autenticação."""
@@ -38,9 +40,9 @@ class ControladorAutenticacao(ControladorBase):
         usuario_encontrado = self.user_model.get_by_email(email)
 
         # Valida se o usuário existe e se a senha corresponde.
-        if usuario_encontrado and usuario_encontrado.password == senha:
+        if usuario_encontrado and bcrypt.checkpw(senha.encode('utf-8'), usuario_encontrado.password.encode('utf-8')):
             # Cria um cookie para manter o usuário logado.
-            response.set_cookie("user_id", usuario_encontrado.id, secret='sua-chave-secreta-aqui', path='/')
+            response.set_cookie("user_id", usuario_encontrado.id, secret=Config.CHAVE_SECRETA, path='/')
             # Redireciona para a página de voos após o login bem-sucedido.
             return self.redirecionar('/voos')
         else:
@@ -63,9 +65,10 @@ class ControladorAutenticacao(ControladorBase):
             return self.pagina_cadastro(erro='Este email já está em uso.')
 
         # Cria uma nova instância do objeto User.
+        hashed_password = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         novo_usuario = User(
             user_id=self.user_model.gerar_proximo_id(),
-            name=nome, email=email, password=senha,
+            name=nome, email=email, password=hashed_password,
             # Atribui valores padrão para os campos não obrigatórios.
             birthdate="N/A", cpf="000.000.000-00", nationality="N/A"
         )

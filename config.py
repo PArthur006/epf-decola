@@ -15,4 +15,4 @@ class Config:
     DATA_PATH = os.path.join(BASE_DIR, 'data')
 
     # Outras configurações
-    SECRET_KEY = 'sua-chave-secreta-aqui'
+    CHAVE_SECRETA = "sAb6O1jr9KT04YZoFLke"
