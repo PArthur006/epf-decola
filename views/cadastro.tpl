@@ -12,6 +12,9 @@
     <div class="container-pagina-formulario">
         <div class="caixa-formulario">
             <h2>Crie sua conta</h2>
+            %if erro:
+            <p style="color: red;">{{erro}}</p>
+            %end
             <form action="/cadastro" method="post">
                 <div class="grupo-formulario">
                     <label for="nome">Nome Completo</label>
@@ -20,6 +23,34 @@
                 <div class="grupo-formulario">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="birthdate">Data de Nascimento</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="nationality">Nacionalidade</label>
+                    <select id="nationality" name="nationality" required>
+                        <option value="">Selecione</option>
+                        <option value="Brasileira">Brasileira</option>
+                        <option value="Americana">Americana</option>
+                        <option value="Portuguesa">Portuguesa</option>
+                        <option value="Espanhola">Espanhola</option>
+                        <option value="Francesa">Francesa</option>
+                        <option value="Alema">Alemã</option>
+                        <option value="Italiana">Italiana</option>
+                        <option value="Japonesa">Japonesa</option>
+                        <option value="Chinesa">Chinesa</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Mexicana">Mexicana</option>
+                        <option value="Canadense">Canadense</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Outra">Outra</option>
+                    </select>
                 </div>
                 <div class="grupo-formulario">
                     <label for="senhaCadastro">Senha</label>

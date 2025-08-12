@@ -1,11 +1,9 @@
 from bottle import request
 from types import SimpleNamespace
 from .controlador_base import ControladorBase
-from models.voo import Voo
-from models.user import User
-from models.reserva import Reserva
-from models.pagamento import Pagamento
+from models import Voo, User, Reserva, Pagamento
 from data.database import get_db
+from sqlalchemy.orm.attributes import flag_modified
 
 class ControladorPagamento(ControladorBase):
     """Controller para gerenciar o processo de checkout e finalização da compra."""
@@ -82,6 +80,7 @@ class ControladorPagamento(ControladorBase):
 
         # Salva o estado do voo com os novos assentos ocupados.
         voo.assentos_ocupados = assentos_ocupados
+        flag_modified(voo, "assentos_ocupados")
         db.add(voo)
 
         # Cria a instância do Pagamento.

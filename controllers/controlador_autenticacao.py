@@ -60,23 +60,36 @@ class ControladorAutenticacao(ControladorBase):
         email = request.forms.get('email')
         senha = request.forms.get('password')
         confirmar_senha = request.forms.get('confirm_password')
+        birthdate = request.forms.get('birthdate')
+        cpf = request.forms.get('cpf')
+        nationality = request.forms.get('nationality')
 
         # Realiza validações básicas.
         if senha != confirmar_senha:
             return self.pagina_cadastro(erro='As senhas não coincidem.')
         
+        # Validação de CPF
+        if not cpf.isdigit() or len(cpf) != 11:
+            return self.pagina_cadastro(erro='CPF inválido. Deve conter 11 dígitos numéricos.')
+
         if db.query(User).filter(User.email == email).first():
             return self.pagina_cadastro(erro='Este email já está em uso.')
+        
+        if db.query(User).filter(User.cpf == cpf).first():
+            return self.pagina_cadastro(erro='Este CPF já está em uso.')
 
         # Cria uma nova instância do objeto User.
         hashed_password = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         novo_usuario = User(
             id=f"U{uuid.uuid4().hex[:4].upper()}", # Generate a random ID
-            name=nome, email=email, password=hashed_password,
-            # Atribui valores padrão para os campos não obrigatórios.
-            birthdate="N/A", cpf=f"000.000.000-00-N{uuid.uuid4().hex[:2]}", nationality="N/A"
+            name=nome, 
+            email=email, 
+            password=hashed_password,
+            birthdate=birthdate, 
+            cpf=cpf, 
+            nationality=nationality
         )
-        # Adiciona o novo usuário ao "banco de dados" JSON.
+        # Adiciona o novo usuário ao banco de dados
         db.add(novo_usuario)
         db.commit()
         # Redireciona para a página de login para que o novo usuário possa entrar.
