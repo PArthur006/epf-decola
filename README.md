@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue.svg) ![Framework](https://img.shields.io/badge/Framework-Bottle-green.svg)
 
-Este projeto é uma aplicação web completa para gestão de reservas aéreas, desenvolvida como trabalho final para a disciplina de **Orientação a Objetos**. O sistema simula um portal de companhia aérea, permitindo que usuários se cadastrem, busquem voos, visualizem um mapa interativo de assentos, e realizem uma reserva completa, com todos os dados persistidos em arquivos JSON.
+Este projeto é uma aplicação web completa para gestão de reservas aéreas, desenvolvida como trabalho final para a disciplina de **Orientação a Objetos**. O sistema simula um portal de companhia aérea, permitindo que usuários se cadastrem, busquem voos, visualizem um mapa interativo de assentos, e realizem uma reserva completa, com todos os dados persistidos em um banco de dados SQLite.
 
 ## ✨ Funcionalidades Implementadas
 
@@ -15,12 +15,17 @@ O projeto conta com um fluxo de usuário completo, incluindo:
 * **Fluxo de Reserva e Pagamento:** Conduz o usuário desde a seleção de assentos até uma página de confirmação e checkout.
 * **Perfil de Usuário:** Uma área logada onde o usuário pode visualizar seus dados pessoais e seu histórico de reservas.
 
+## 📈 Melhorias Recentes
+
+*   **Segurança Aprimorada (Hashing de Senhas):** Implementação de hashing de senhas utilizando `bcrypt` para garantir que as credenciais dos usuários sejam armazenadas de forma segura, protegendo contra acessos não autorizados.
+*   **Persistência de Dados com Banco de Dados:** Migração da persistência de dados de arquivos JSON para um banco de dados relacional (SQLite), proporcionando maior robustez, integridade e escalabilidade para o armazenamento de informações de usuários, voos e reservas.
+
 ## 🚀 Tecnologias Utilizadas
 
 * **Back-end:** Python 3
 * **Microframework Web:** Bottle
 * **Front-end:** HTML5, CSS3 (com Flexbox e Grid), JavaScript
-* **Persistência de Dados:** JSON
+* **Persistência de Dados:** SQLite (com SQLAlchemy ORM)
 * **Controle de Versão:** Git e GitHub
 
 ![Diagrama da Arquitetura do Projeto](./docs/diagrama-projeto.jpeg)
@@ -77,8 +82,8 @@ Siga os passos abaixo para rodar o projeto em seu ambiente local.
 
 ## 🧑‍💻 Equipe
 
-* **([Pedro Arthur Rodrigues](https://github.com/PArthur006)):** Responsável pelo desenvolvimento Front-end, arquitetura dos Controllers e interatividade das páginas.
-* **([Maria Luana Lopes](https://github.com/MLuana725))** Responsável pelo desenvolvimento Back-end, modelagem de dados e lógica de persistência.
+* **([Pedro Arthur Rodrigues](https://github.com/PArthur006)):** Responsável pelo desenvolvimento Front-end, arquitetura dos Controllers, lógica de persistência e interatividade das páginas.
+* **([Maria Luana Lopes](https://github.com/MLuana725))** Responsável pelo desenvolvimento Back-end e modelagem de dados.
 
 ---
 *Este projeto foi desenvolvido para a disciplina de Orientação a Objetos (2025.1) do Professor Lucas Boaventura, a partir de um template educacional.*

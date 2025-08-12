@@ -14,8 +14,25 @@
         
         <div class="caixa-perfil">
             <h3>Seus Dados</h3>
-            <p><strong>Nome:</strong> {{usuario.name}}</p>
-            <p><strong>Email:</strong> {{usuario.email}}</p>
+            <form action="/minha-conta/editar" method="post">
+                <div class="grupo-formulario">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" value="{{usuario.name}}" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{usuario.email}}" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="password">Nova Senha (deixe em branco para não alterar)</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="confirm_password">Confirme a Nova Senha</label>
+                    <input type="password" id="confirm_password" name="confirm_password">
+                </div>
+                <button type="submit" class="btn-largura-total">Atualizar Dados</button>
+            </form>
         </div>
 
         <div class="historico-reservas">
