@@ -1,4 +1,5 @@
 from bottle import static_file, template, redirect, request
+from config import Config
 
 class ControladorBase:
     """
@@ -27,7 +28,7 @@ class ControladorBase:
         informação para todos os templates.
         """
         # Lê o cookie 'user_id' para determinar o estado de login do usuário.
-        id_usuario_logado = request.get_cookie("user_id", secret='sua-chave-secreta-aqui')
+        id_usuario_logado = request.get_cookie("user_id", secret=Config.CHAVE_SECRETA)
         
         # Adiciona a variável 'usuario_logado' (True or False) ao contexto do template.
         contexto['usuario_logado'] = id_usuario_logado is not None
@@ -41,4 +42,4 @@ class ControladorBase:
 
     def obter_usuario_logado(self):
         """Lê o cookie e retorna o ID do usuário logado, se existir."""
-        return request.get_cookie("user_id", secret='sua-chave-secreta-aqui')
+        return request.get_cookie("user_id", secret=Config.CHAVE_SECRETA)
