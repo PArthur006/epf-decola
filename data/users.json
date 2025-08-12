@@ -66,6 +66,20 @@
         "cpf": "000.000.000-00",
         "nationality": "N/A",
         "phone": null,
+        "reservas": [
+            "RDB202U005D23",
+            "RDB202U005E23"
+        ]
+    },
+    {
+        "id": "U006",
+        "name": "Joana Darc",
+        "email": "Joana@gmail.com",
+        "password": "$2b$12$5uq3U95hujWzhYTYt/SFZeSsnZa5XT0nfw99ScP/8ZyWPgO1lwGh.",
+        "birthdate": "N/A",
+        "cpf": "000.000.000-00",
+        "nationality": "N/A",
+        "phone": null,
         "reservas": []
     }
 ]

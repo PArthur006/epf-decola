@@ -2,3 +2,5 @@ bottle
 bcrypt
 pylint
 pytest
+SQLAlchemy
+pysqlite3-binary
