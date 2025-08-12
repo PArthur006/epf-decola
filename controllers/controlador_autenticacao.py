@@ -1,15 +1,16 @@
 from bottle import request, response
 import bcrypt
+import uuid # for generating random ids
 from .controlador_base import ControladorBase
-from models.user import UserModel, User
+from models.user import User
 from config import Config
+from data.database import get_db
 
 class ControladorAutenticacao(ControladorBase):
     """Controller responsável por todas as rotas de autenticação."""
-    def __init__(self, app, user_model: UserModel):
-        """Construtor que recebe a apicação Bottle e a instância compartilhada do UserModel."""
+    def __init__(self, app):
+        """Construtor que recebe a apicação Bottle."""
         super().__init__(app)
-        self.user_model = user_model
         self.configurar_rotas()
 
     def configurar_rotas(self):
@@ -35,12 +36,14 @@ class ControladorAutenticacao(ControladorBase):
     
     def efetuar_login(self):
         """Processa os dados do formulário de login, valida o usuário e gerencia o cookie de sessão."""
+        db = next(get_db())
         email = request.forms.get('email')
         senha = request.forms.get('password')
-        usuario_encontrado = self.user_model.get_by_email(email)
+        
+        usuario_encontrado = db.query(User).filter(User.email == email).first()
 
         # Valida se o usuário existe e se a senha corresponde.
-        if usuario_encontrado and bcrypt.checkpw(senha.encode('utf-8'), usuario_encontrado.password):
+        if usuario_encontrado and bcrypt.checkpw(senha.encode('utf-8'), usuario_encontrado.password.encode('utf-8')):
             # Cria um cookie para manter o usuário logado.
             response.set_cookie("user_id", usuario_encontrado.id, secret=Config.CHAVE_SECRETA, path='/')
             # Redireciona para a página de voos após o login bem-sucedido.
@@ -51,6 +54,7 @@ class ControladorAutenticacao(ControladorBase):
 
     def efetuar_cadastro(self):
         """Processa os dados do formulário de cadastro, cria um novo usuário e o salva."""
+        db = next(get_db())
         # Coleta os dados do formulário.
         nome = request.forms.get('nome')
         email = request.forms.get('email')
@@ -61,19 +65,20 @@ class ControladorAutenticacao(ControladorBase):
         if senha != confirmar_senha:
             return self.pagina_cadastro(erro='As senhas não coincidem.')
         
-        if self.user_model.get_by_email(email):
+        if db.query(User).filter(User.email == email).first():
             return self.pagina_cadastro(erro='Este email já está em uso.')
 
         # Cria uma nova instância do objeto User.
         hashed_password = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         novo_usuario = User(
-            user_id=self.user_model.gerar_proximo_id(),
+            id=f"U{uuid.uuid4().hex[:4].upper()}", # Generate a random ID
             name=nome, email=email, password=hashed_password,
             # Atribui valores padrão para os campos não obrigatórios.
-            birthdate="N/A", cpf="000.000.000-00", nationality="N/A"
+            birthdate="N/A", cpf=f"000.000.000-00-N{uuid.uuid4().hex[:2]}", nationality="N/A"
         )
         # Adiciona o novo usuário ao "banco de dados" JSON.
-        self.user_model.add_user(novo_usuario)
+        db.add(novo_usuario)
+        db.commit()
         # Redireciona para a página de login para que o novo usuário possa entrar.
         return self.redirecionar('/login')
 

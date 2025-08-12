@@ -1,16 +1,15 @@
 from bottle import request
 from .controlador_base import ControladorBase
-from models.user import UserModel
-from models.reserva import ReservaModel
+from models.user import User
+from models.reserva import Reserva
+from data.database import get_db
 
 class ControladorUsuario(ControladorBase):
     """Controller para gerenciar a área do usuário logado ("Minha Conta")
     e as rotas administrativas de CRUD de usuário."""
-    def __init__(self, app, user_model: UserModel, reserva_model: ReservaModel):
+    def __init__(self, app):
         """Recebe as instâncias compartilhadas dos models de usuários e reserva."""
         super().__init__(app)
-        self.user_model = user_model
-        self.reserva_model = reserva_model
         self.configurar_rotas()
 
     def configurar_rotas(self):
@@ -23,7 +22,8 @@ class ControladorUsuario(ControladorBase):
         self.app.route('/minha-conta', method='GET', callback=self.pagina_minha_conta)
 
     def listar_usuarios(self):
-        usuarios = self.user_model.get_all()
+        db = next(get_db())
+        usuarios = db.query(User).all()
         return self.renderizar('usuarios', usuarios=usuarios, titulo="Lista de Usuários")
 
     def adicionar_usuario(self):
@@ -61,6 +61,7 @@ class ControladorUsuario(ControladorBase):
 
     def pagina_minha_conta(self):
         """Exibe a página de perfil do usuário com seus dados e histórico de reservas."""
+        db = next(get_db())
         # Obtém o ID do usuário a partir do cookie de sessão.
         id_usuario_logado = self.obter_usuario_logado()
 
@@ -69,18 +70,14 @@ class ControladorUsuario(ControladorBase):
             return self.redirecionar('/login')
 
         # Busca o objeto completo do usuário usando o ID.
-        lista_ids_no_modelo = [u.id for u in self.user_model.get_all()]
-
-        # Busca o objeto completo do usuário usando o ID
-        usuario = self.user_model.get_by_id(id_usuario_logado)
+        usuario = db.query(User).filter(User.id == id_usuario_logado).first()
         
         # Caso o cookie exista ma so usuário tenha sido deletado.
         if not usuario:
             return self.redirecionar('/logout')
 
         # Busca todas as reservas e filtra apenas as que pertencem a este usuário.
-        todas_as_reservas = self.reserva_model.get_all()
-        reservas_do_usuario = [r for r in todas_as_reservas if r.user and r.user.id == id_usuario_logado]
+        reservas_do_usuario = db.query(Reserva).filter(Reserva.user_id == id_usuario_logado).all()
 
         # Renderiza o template, passando os dados do usuário e sua lista de reservas.
         return self.renderizar('minha_conta', usuario=usuario, reservas=reservas_do_usuario, titulo="Minha Conta")

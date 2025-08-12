@@ -1,12 +1,12 @@
 from .controlador_base import ControladorBase
-from models.voo import VooModel
+from models.voo import Voo
+from data.database import get_db
 
 class ControladorVoo(ControladorBase):
     """Controller para gerenciar as rotas de visualização de voos e seleção de assentos."""
-    def __init__(self, app, voo_model: VooModel):
-        """Recebe a instância da aplicação e o modelo de voo compartilhado."""
+    def __init__(self, app):
+        """Recebe a instância da aplicação."""
         super().__init__(app)
-        self.voo_model = voo_model
         self.configurar_rotas()
 
     def configurar_rotas(self):
@@ -21,12 +21,14 @@ class ControladorVoo(ControladorBase):
 
     def listar_voos(self, template='lista_voos'):
         """Busca todos os voos no modelo e os envia para a view."""
-        todos_os_voos = self.voo_model.get_all()
+        db = next(get_db())
+        todos_os_voos = db.query(Voo).all()
         return self.renderizar(template, voos=todos_os_voos, destinos_populares=todos_os_voos, titulo="Voos Disponíveis")
 
     def selecionar_assentos(self, id_voo):
         """Busca um voo específico e renderiza o mapa de assentos."""
-        voo_especifico = self.voo_model.get_by_numero_voo(id_voo)
+        db = next(get_db())
+        voo_especifico = db.query(Voo).filter(Voo.numero_voo == id_voo).first()
 
         if not voo_especifico:
             return "Voo não encontrado!"
