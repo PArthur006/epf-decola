@@ -3,21 +3,30 @@ from sqlalchemy.orm import relationship
 from data.database import Base
 
 class User(Base):
+    """Representa um usuário no sistema, incluindo suas informações pessoais e de autenticação."""
     __tablename__ = "users"
 
-    id = Column(String, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
-    password = Column(String, nullable=False)
-    birthdate = Column(String, nullable=False)
-    cpf = Column(String, unique=True, nullable=False)
-    nationality = Column(String, nullable=False)
-    phone = Column(String, nullable=True)
+    id = Column(String, primary_key=True, index=True, doc="Identificador único do usuário.")
+    name = Column(String, nullable=False, doc="Nome completo do usuário.")
+    email = Column(String, unique=True, index=True, nullable=False, doc="Endereço de e-mail único do usuário.")
+    password = Column(String, nullable=False, doc="Senha hash do usuário.")
+    birthdate = Column(String, nullable=False, doc="Data de nascimento do usuário.")
+    cpf = Column(String, unique=True, nullable=False, doc="CPF único do usuário.")
+    nationality = Column(String, nullable=False, doc="Nacionalidade do usuário.")
+    phone = Column(String, nullable=True, doc="Número de telefone do usuário (opcional).")
 
-    reservas = relationship("Reserva", back_populates="user")
+    reservas = relationship("Reserva", back_populates="user", doc="Lista de reservas feitas pelo usuário.")
 
     @staticmethod
     def validar_cpf(cpf):
+        """Valida um número de CPF.
+
+        Args:
+            cpf (str): O número de CPF a ser validado.
+
+        Returns:
+            bool: True se o CPF for válido, False caso contrário.
+        """
         cpf = ''.join(filter(str.isdigit, cpf))
 
         if len(cpf) != 11:

@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from data.database import Base
 
-# Add the project root to the python path
+# Adiciona a raiz do projeto ao caminho do python
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from models.user import User

@@ -4,6 +4,7 @@ from models.user import User
 from models.reserva import Reserva
 from data.database import get_db
 import bcrypt
+import uuid
 
 class ControladorUsuario(ControladorBase):
     """Controller para gerenciar a área do usuário logado ("Minha Conta")
@@ -25,12 +26,18 @@ class ControladorUsuario(ControladorBase):
 
 
     def listar_usuarios(self):
+        """Exibe a lista de todos os usuários cadastrados no sistema."""
         db = next(get_db())
         usuarios = db.query(User).all()
         return self.renderizar('usuarios', usuarios=usuarios, titulo="Lista de Usuários")
 
     def adicionar_usuario(self):
-        """Lida com a adição de um novo usuário."""
+        """Lida com a adição de um novo usuário.
+
+        Se o método da requisição for GET, exibe o formulário de cadastro.
+        Se for POST, processa os dados do formulário para criar um novo usuário,
+        incluindo validação de CPF, e-mail e hash de senha.
+        """
         db = next(get_db())
         if request.method == 'GET':
             # Mostra o formulário de adição.
@@ -73,7 +80,12 @@ class ControladorUsuario(ControladorBase):
             self.redirecionar('/login')
 
     def editar_usuario(self, user_id):
-        """Lida com a edição de um usuário existente."""
+        """Lida com a edição de um usuário existente.
+
+        Esta função é um placeholder. Em uma implementação completa,
+        deveria buscar o usuário pelo `user_id` no banco de dados,
+        preencher o formulário com seus dados e processar as atualizações.
+        """
         # TODO: Aqui entrará a chamada para o serviço para buscar o usuário pelo ID.
         
         # Por enquanto, usamos um dicionário vazio como dado de exemplo.
@@ -91,6 +103,11 @@ class ControladorUsuario(ControladorBase):
             self.redirecionar('/usuarios')
 
     def deletar_usuario(self, user_id):
+        """Lida com a exclusão de um usuário existente.
+
+        Esta função é um placeholder. Em uma implementação completa,
+        deveria buscar o usuário pelo `user_id` no banco de dados e excluí-lo.
+        """
         # TODO: Aqui entrará a chamada para o serviço para deletar o usuário.
         print(f"Requisição para deletar o usuário {user_id} recebida. Redirecionando...")
         self.redirecionar('/usuarios')
@@ -119,6 +136,7 @@ class ControladorUsuario(ControladorBase):
         return self.renderizar('minha_conta', usuario=usuario, reservas=reservas_do_usuario, titulo="Minha Conta")
 
     def editar_minha_conta(self):
+        """Processa a edição dos dados do perfil do usuário logado."""
         db = next(get_db())
         id_usuario_logado = self.obter_usuario_logado()
         if not id_usuario_logado:

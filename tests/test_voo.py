@@ -12,8 +12,9 @@ def mock_app():
 def voo_controller(mock_app):
     return ControladorVoo(mock_app)
 
+# Teste para verificar se a listagem de voos funciona corretamente.
 def test_listar_voos(voo_controller, db_session):
-    # Pre-populate the database with a destination and a flight
+    # Preenche o banco de dados com um destino e um voo
     destino = Destino(cidade="Test City", pais="Test Country", aeroporto="TCY", imagem="img.png")
     db_session.add(destino)
     db_session.commit()

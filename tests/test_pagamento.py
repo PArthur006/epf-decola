@@ -12,8 +12,9 @@ def mock_app():
 def pagamento_controller(mock_app):
     return ControladorPagamento(mock_app)
 
+# Teste para verificar se a página de pagamento é renderizada corretamente com os dados da reserva.
 def test_pagina_pagamento(pagamento_controller, db_session):
-    # Pre-populate the database with a destination, a flight and a user
+    # Preenche o banco de dados com um destino, um voo e um usuário
     destino = Destino(cidade="Test City", pais="Test Country", aeroporto="TCY", imagem="img.png")
     db_session.add(destino)
     db_session.commit()

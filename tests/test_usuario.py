@@ -15,28 +15,31 @@ def mock_app():
 def usuario_controller(mock_app):
     return ControladorUsuario(mock_app)
 
+# Teste para verificar a validação de CPFs válidos.
 def test_validar_cpf_validos():
     assert User.validar_cpf("123.456.789-09") == True
     assert User.validar_cpf("987.654.321-00") == True
 
+# Teste para verificar a validação de CPFs inválidos.
 def test_validar_cpf_invalidos():
-    assert User.validar_cpf("000.000.000-00") == False # All zeros
-    assert User.validar_cpf("111.111.111-11") == False # All ones
-    assert User.validar_cpf("222.222.222-22") == False # All twos
-    assert User.validar_cpf("333.333.333-33") == False # All threes
-    assert User.validar_cpf("444.444.444-44") == False # All fours
-    assert User.validar_cpf("555.555.555-55") == False # All fives
-    assert User.validar_cpf("666.666.666-66") == False # All sixes
-    assert User.validar_cpf("777.777.777-77") == False # All sevens
-    assert User.validar_cpf("888.888.888-88") == False # All eights
-    assert User.validar_cpf("999.999.999-99") == False # All nines
-    assert User.validar_cpf("123") == False # Too short
-    assert User.validar_cpf("123.456.789-0") == False # Too short
-    assert User.validar_cpf("123456789012") == False # Too long
-    assert User.validar_cpf("abc.def.ghi-jk") == False # Non-digits
-    assert User.validar_cpf("111.111.111-12") == False # Invalid last digit
-    assert User.validar_cpf("123.456.789-10") == False # Invalid last digit
+    assert User.validar_cpf("000.000.000-00") == False # Todos os zeros
+    assert User.validar_cpf("111.111.111-11") == False # Todos os uns
+    assert User.validar_cpf("222.222.222-22") == False # Todos os dois
+    assert User.validar_cpf("333.333.333-33") == False # Todos os três
+    assert User.validar_cpf("444.444.444-44") == False # Todos os quatros
+    assert User.validar_cpf("555.555.555-55") == False # Todos os cincos
+    assert User.validar_cpf("666.666.666-66") == False # Todos os seis
+    assert User.validar_cpf("777.777.777-77") == False # Todos os setes
+    assert User.validar_cpf("888.888.888-88") == False # Todos os oitos
+    assert User.validar_cpf("999.999.999-99") == False # Todos os noves
+    assert User.validar_cpf("123") == False # Muito curto
+    assert User.validar_cpf("123.456.789-0") == False # Muito curto
+    assert User.validar_cpf("123456789012") == False # Muito longo
+    assert User.validar_cpf("abc.def.ghi-jk") == False # Não-dígitos
+    assert User.validar_cpf("111.111.111-12") == False # Último dígito inválido
+    assert User.validar_cpf("123.456.789-10") == False # Último dígito inválido
 
+# Teste para verificar se a página "Minha Conta" é renderizada corretamente com os dados do usuário e suas reservas.
 def test_pagina_minha_conta(usuario_controller, db_session):
     # Pre-populate the database with a user and a reservation
     user = User(
@@ -83,6 +86,7 @@ def test_pagina_minha_conta(usuario_controller, db_session):
         assert len(kwargs['reservas']) == 1
         assert kwargs['reservas'][0].assento == 'A1'
 
+# Teste para verificar a edição bem-sucedida dos dados da conta do usuário.
 def test_editar_minha_conta_success(usuario_controller, db_session):
     hashed_password = bcrypt.hashpw(b'old_password', bcrypt.gensalt())
     user = User(
@@ -118,6 +122,7 @@ def test_editar_minha_conta_success(usuario_controller, db_session):
         assert updated_user.email == 'new@example.com'
         assert bcrypt.checkpw(b'old_password', updated_user.password.encode('utf-8'))
 
+# Teste para verificar a alteração de senha na edição da conta do usuário.
 def test_editar_minha_conta_password_change(usuario_controller, db_session):
     hashed_password = bcrypt.hashpw(b'old_password', bcrypt.gensalt())
     user = User(
@@ -151,6 +156,7 @@ def test_editar_minha_conta_password_change(usuario_controller, db_session):
         updated_user = db_session.query(User).filter_by(id='U001').first()
         assert bcrypt.checkpw(b'new_password', updated_user.password.encode('utf-8'))
 
+# Teste para verificar o cenário onde as senhas não coincidem durante a edição da conta.
 def test_editar_minha_conta_password_mismatch(usuario_controller, db_session):
     hashed_password = bcrypt.hashpw(b'old_password', bcrypt.gensalt())
     user = User(
@@ -179,6 +185,7 @@ def test_editar_minha_conta_password_mismatch(usuario_controller, db_session):
         usuario_controller.editar_minha_conta()
         assert "As senhas não coincidem." in mock_renderizar.call_args[1]['erro']
 
+# Teste para verificar o cenário onde o email já está em uso por outro usuário durante a edição da conta.
 def test_editar_minha_conta_email_in_use(usuario_controller, db_session):
     hashed_password = bcrypt.hashpw(b'old_password', bcrypt.gensalt())
     user = User(

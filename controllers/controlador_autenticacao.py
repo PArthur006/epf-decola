@@ -1,6 +1,6 @@
 from bottle import request, response
 import bcrypt
-import uuid # for generating random ids
+import uuid
 from .controlador_base import ControladorBase
 from models.user import User
 from config import Config
@@ -69,8 +69,8 @@ class ControladorAutenticacao(ControladorBase):
             return self.pagina_cadastro(erro='As senhas não coincidem.')
         
         # Validação de CPF
-        if not cpf.isdigit() or len(cpf) != 11:
-            return self.pagina_cadastro(erro='CPF inválido. Deve conter 11 dígitos numéricos.')
+        if not User.validar_cpf(cpf):
+            return self.pagina_cadastro(erro='CPF inválido.')
 
         if db.query(User).filter(User.email == email).first():
             return self.pagina_cadastro(erro='Este email já está em uso.')

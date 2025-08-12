@@ -1,6 +1,7 @@
 import os
 
 class Config:
+    """Classe de configuração para a aplicação, contendo variáveis de ambiente e caminhos."""
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # Configurações do servidor

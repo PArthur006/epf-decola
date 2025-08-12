@@ -18,7 +18,7 @@ class ControladorPagamento(ControladorBase):
         self.app.route('/pagamento/<id_voo>/<assentos_selecionados>', method='POST', callback=self.efetuar_pagamento)
 
     def pagina_pagamento(self, id_voo, assentos_selecionados):
-        """Apenas prepara e exibe os dados para a página de confirmaçaõ,
+        """Apenas prepara e exibe os dados para a página de confirmação,
         antes de o usuário inserir os dados do cartão."""
         db = next(get_db())
         voo = db.query(Voo).filter(Voo.numero_voo == id_voo).first()
