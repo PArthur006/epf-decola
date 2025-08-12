@@ -22,5 +22,29 @@
         "FormaPagamento": "Cartão de Crédito",
         "Status": "Pendente",
         "DataPagamento": "2025-07-07T11:52:45.849661"
+    },
+    {
+        "ID": "PG0004",
+        "ReservaID": "RDB202U001B3",
+        "Valor": 2400.0,
+        "FormaPagamento": "Cartão de Crédito",
+        "Status": "Pendente",
+        "DataPagamento": "2025-07-07T14:30:04.494700"
+    },
+    {
+        "ID": "PG0005",
+        "ReservaID": "RDB101U004B3",
+        "Valor": 1440.0,
+        "FormaPagamento": "Cartão de Crédito",
+        "Status": "Pendente",
+        "DataPagamento": "2025-07-07T14:50:01.731352"
+    },
+    {
+        "ID": "PG0006",
+        "ReservaID": "RDB202U005D23",
+        "Valor": 2400.0,
+        "FormaPagamento": "Cartão de Crédito",
+        "Status": "Pendente",
+        "DataPagamento": "2025-07-08T13:25:12.079806"
     }
 ]
